@@ -12,12 +12,20 @@ public:
 	void initGame();
 	void runGame();
 	void cleanUpGame();
+
 private:
 	GameHandler();
-	GameHandler(const GameHandler)&
-	GameHandler& operator=(const GameObject&);
+	GameHandler(const GameHandler&);
+	GameHandler& operator=(const GameHandler&);
 	
-	void prompUser()
+	void prompUser();
+	void renderPlayboard();
+	void renderScoreBoard();
+	void processPlayboard();
+	void startNewGame();
+	void getNewPiece();
+	void moveCurrentPiece();
 };
+
 #endif
 
