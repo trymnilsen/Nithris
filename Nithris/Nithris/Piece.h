@@ -1,9 +1,14 @@
 #ifndef PIECE_H
 #define PIECE_H
-class Piece
+
+#include <vector>
+#include "TileColor.h"
+
+class Piece 
 {
 public:
-protected:
+
 private:
+	std::vector<std::vector<ETileColor>> pieceObject;
 };
 #endif // !PIECE_H
