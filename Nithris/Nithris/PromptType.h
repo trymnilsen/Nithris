@@ -1,0 +1,9 @@
+#ifndef PROMPTTYPE_H
+#define PROMPTTYPE_H
+enum EPromtType
+{
+	PROMT_NEWGAME,
+	PROMT_PAUSE,
+	PROMT_GAMEOVER
+};
+#endif // !PROMPTTYPE_H
