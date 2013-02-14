@@ -19,5 +19,6 @@ private:
 	void DrawWelcomeMessage();
 	void DrawPauseMessage();
 	void DrawGameOverMessage();
+	
 };
 #endif
