@@ -20,5 +20,7 @@ private:
 	void DrawPauseMessage();
 	void DrawGameOverMessage();
 	
+	SDL_Window *gameWindowPointer;
+	SDL_Renderer *windowRenderPointer;
 };
 #endif
