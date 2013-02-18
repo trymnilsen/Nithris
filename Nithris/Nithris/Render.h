@@ -19,7 +19,7 @@ private:
 	void DrawWelcomeMessage();
 	void DrawPauseMessage();
 	void DrawGameOverMessage();
-	
+
 	SDL_Window *gameWindowPointer;
 	SDL_Renderer *windowRenderPointer;
 };

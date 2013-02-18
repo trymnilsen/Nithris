@@ -17,7 +17,6 @@ Render::Render()
 	windowRenderPointer=SDL_CreateRenderer(gameWindowPointer,-1,SDL_RENDERER_ACCELERATED);
 	if(windowRenderPointer==NULL)
 		throw GraphicsInitEx("Failed creating renderer for window");
-
 	//Set render color
 	SDL_SetRenderDrawColor(windowRenderPointer,0,0,0,255);
 }
@@ -27,7 +26,7 @@ Render::~Render()
 
 }
 
-void Render::renderPlayBoard(Playboard& boardToBeRendered )
+void Render::renderPlayBoard(Playboard& boardToBeRendered)
 {
 
 }

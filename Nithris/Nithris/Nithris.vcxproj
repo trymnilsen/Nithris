@@ -87,6 +87,7 @@
     <ClInclude Include="GameTimer.h" />
     <ClInclude Include="GraphicsInitEx.h" />
     <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="NithrisConstants.h" />
     <ClInclude Include="Piece.h" />
     <ClInclude Include="Playboard.h" />
     <ClInclude Include="PromptType.h" />

@@ -1,6 +1,8 @@
 #ifndef GAMEHANDLER_H
 #define GAMEHANDLER_H
 
+#include <SDL.h>
+
 class GameHandler
 {
 public:
@@ -25,6 +27,8 @@ private:
 	void startNewGame();
 	void getNewPiece();
 	void moveCurrentPiece();
+	SDL_Texture *LoadAsset(const char* filename);
+	
 };
 
 #endif

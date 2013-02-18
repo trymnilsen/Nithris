@@ -53,5 +53,8 @@
     <ClInclude Include="GraphicsInitEx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="NithrisConstants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
