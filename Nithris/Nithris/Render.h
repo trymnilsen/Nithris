@@ -5,13 +5,15 @@
 #include"Piece.h"
 #include"SDL.h"
 #include"PromptType.h"
+#include"NithrisConstants.h"
+#include"TileColor.h"
 
 class Render
 {
 public:
 	Render();
 	~Render();
-	void renderPlayBoard(Playboard& boardToBeRendered);
+	void renderPlayBoard(const Playboard& boardToBeRendered);
 	void renderScoreBoard(Piece& nextPiece, int currentScore, int highScore);
 	void promtUser(EPromtType& type);
 	void flipBuffers();
@@ -22,5 +24,7 @@ private:
 
 	SDL_Window *gameWindowPointer;
 	SDL_Renderer *windowRenderPointer;
+	SDL_Surface *backBuffer;
+	
 };
 #endif

@@ -8,8 +8,8 @@
 class Playboard
 {
 public:
-	bool pieceAt(char collum, char row);
-	bool setPieceAt(char collum, char row, Piece& piece);
+	const ETileColor colorOfTileAt(char collum, char row);
+	bool setPieceAt(unsigned char collum,unsigned char row, Piece& piece);
 	void checkBoard();
 private:
 	std::vector<std::vector<ETileColor>> boardVector;

@@ -1,5 +1,7 @@
 #include "Render.h"
 #include "GraphicsInitEx.h"
+#include "TileColor.h"
+#include "Playboard.h"
 
 Render::Render()
 {
@@ -28,7 +30,22 @@ Render::~Render()
 
 void Render::renderPlayBoard(Playboard& boardToBeRendered)
 {
+	for(char y=0; y<playboardTilesHeight; y++)
+	{
+		for(char x=0; x<playboardTilesWidth; x++)
+		{
+			SDL_Rect tileSourceRect;
+			SDL_Rect tileDestinationRect;
+			const ETileColor tileColor = boardToBeRendered.colorOfTileAt(x,y);
+			tileSourceRect.x=tileColor*tileSize;
+			tileSourceRect.y=0;
+			tileSourceRect.w=tileSize;
+			tileSourceRect.h=tileSize;
 
+			SDL_RenderCopy(windowRenderPointer,NULL,&tileSourceRect,&tileDestinationRect);
+		}
+	}
+	
 }
 
 void Render::renderScoreBoard(Piece& nextPiece, int currentScore, int highScore )
@@ -36,7 +53,7 @@ void Render::renderScoreBoard(Piece& nextPiece, int currentScore, int highScore 
 
 }
 
-void Render::promtUser(EPromtType& type )
+void Render::promtUser(EPromtType& type)
 {
 
 }
