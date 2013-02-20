@@ -2,6 +2,12 @@
 #define GAMEHANDLER_H
 
 #include <SDL.h>
+#include <memory>
+#include <vector>
+
+#include "Render.h"
+#include "GraphicsInitEx.h"
+#include "NithrisConstants.h"
 
 class GameHandler
 {
@@ -14,7 +20,7 @@ public:
 	void initGame();
 	void runGame();
 	void cleanUpGame();
-
+	std::shared_ptr<SDL_Texture> getAsset(ETexture requestedAsset);
 private:
 	GameHandler();
 	GameHandler(const GameHandler&);
@@ -27,8 +33,9 @@ private:
 	void startNewGame();
 	void getNewPiece();
 	void moveCurrentPiece();
-	SDL_Texture *LoadAsset(const char* filename);
-	
+	std::shared_ptr<SDL_Texture> LoadAsset(const char* filename);
+	std::unique_ptr<Render> gameRender;
+	std::vector<std::shared_ptr<SDL_Texture>> Content;
 };
 
 #endif

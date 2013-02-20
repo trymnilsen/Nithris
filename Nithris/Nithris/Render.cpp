@@ -1,9 +1,15 @@
 #include "Render.h"
-#include "GraphicsInitEx.h"
-#include "TileColor.h"
-#include "Playboard.h"
 
 Render::Render()
+{
+
+}
+
+Render::~Render()
+{
+
+}
+void Render::renderInit()
 {
 	if(!SDL_WasInit(SDL_INIT_VIDEO))
 	{
@@ -21,11 +27,15 @@ Render::Render()
 		throw GraphicsInitEx("Failed creating renderer for window");
 	//Set render color
 	SDL_SetRenderDrawColor(windowRenderPointer,0,0,0,255);
-}
 
-Render::~Render()
-{
+	try
+	{
 
+	}
+	catch(GraphicsInitEx giniterror)
+	{
+		std::cout<<giniterror.what()<<std::endl;
+	}
 }
 
 void Render::renderPlayBoard(Playboard& boardToBeRendered)
@@ -42,15 +52,27 @@ void Render::renderPlayBoard(Playboard& boardToBeRendered)
 			tileSourceRect.w=tileSize;
 			tileSourceRect.h=tileSize;
 
+			tileDestinationRect.x=x*tileSize;
+			tileDestinationRect.y=y*tileSize;
+			tileDestinationRect.w=tileSize;
+			tileDestinationRect.h=tileSize;
+
 			SDL_RenderCopy(windowRenderPointer,NULL,&tileSourceRect,&tileDestinationRect);
 		}
 	}
 	
 }
 
-void Render::renderScoreBoard(Piece& nextPiece, int currentScore, int highScore )
+void Render::renderScoreBoard(const Piece& nextPiece, int currentScore, int highScore )
 {
-
+	SDL_Rect piecePos;
+	piecePos.x=playboardTilesWidth*tileSize+ScoreBoardWidth/2-2*tileSize;
+	piecePos.y=50;
+	piecePos.w=4*tileSize;
+	piecePos.h=4*tileSize;
+	DrawPiece(nextPiece,&piecePos);
+	DrawNumber(currentScore,&piecePos);
+	DrawNumber(highScore,&piecePos);
 }
 
 void Render::promtUser(EPromtType& type)
@@ -61,6 +83,10 @@ void Render::promtUser(EPromtType& type)
 void Render::flipBuffers()
 {
 
+}
+SDL_Renderer* Render::getRenderer()
+{
+	return windowRenderPointer;
 }
 
 void Render::DrawWelcomeMessage()
@@ -77,4 +103,49 @@ void Render::DrawGameOverMessage()
 {
 
 }
+
+void Render::DrawPiece(const Piece& pieceToDraw, SDL_Rect *position )
+{
+	for(char y=0; y<4; y++)
+	{
+		for(char x=0; x<4; x++)
+		{
+			DrawTile(pieceToDraw.pieceObject[x][y],)
+		}
+	}
+}
+
+void Render::DrawNumber(int number, SDL_Rect *position )
+{
+
+}
+
+void Render::DrawTile(ETileColor color, Position *position)
+{
+	SDL_Rect tileSourceRect;
+	SDL_Rect tileDestinationRect;
+	tileSourceRect.x=color*tileSize;
+	tileSourceRect.y=0;
+	tileSourceRect.w=tileSize;
+	tileSourceRect.h=tileSize;
+
+	tileDestinationRect.x=position->X;
+	tileDestinationRect.y=position->Y;
+	tileDestinationRect.w=tileSize;
+	tileDestinationRect.h=tileSize;
+
+	SDL_RenderCopy(windowRenderPointer,,&tileSourceRect,&tileDestinationRect);
+}
+
+std::shared_ptr<SDL_Texture>  Render::LoadBmpFile( const char* filename )
+{
+	SDL_Surface *loadedFile=SDL_LoadBMP(filename);
+	if(!loadedFile)
+		throw GraphicsInitEx("Failed loading file");
+
+	std::shared_ptr<SDL_Texture> returnTexture;
+	returnTexture=SDL_CreateTextureFromSurface(gameRender.get()->getRenderer(),loadedFile);
+	return returnTexture;
+}
+
 

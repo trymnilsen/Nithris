@@ -1,5 +1,12 @@
 #ifndef NITHRISCONSTANTS_H
 #define NITHRISCONSTANTS_H
+enum ETexture{
+	BRICKS,
+	SCOREBOARD,
+	PAUSESCREEN,
+	WELCOMESCREEN,
+	ENDSCREEN
+};
 
 const unsigned char playboardTilesWidth = 10;
 const unsigned char playboardTilesHeight = 10;

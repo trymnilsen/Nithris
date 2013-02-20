@@ -3,12 +3,15 @@
 
 #include <vector>
 #include "TileColor.h"
+#include "Position.h"
 
 class Piece 
 {
 public:
+	std::vector<std::vector<ETileColor>> pieceObject;
+	Position PiecePosition;
 
 private:
-	std::vector<std::vector<ETileColor>> pieceObject;
+	
 };
 #endif // !PIECE_H
