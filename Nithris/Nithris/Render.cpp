@@ -27,15 +27,9 @@ void Render::renderInit()
 		throw GraphicsInitEx("Failed creating renderer for window");
 	//Set render color
 	SDL_SetRenderDrawColor(windowRenderPointer,0,0,0,255);
+	brickTexture=LoadBmpFile("Assets/tiles_32x32.bmp");
+	scoreBoardTexture=LoadBmpFile("Assets/scoreboard_back.bmp");
 
-	try
-	{
-
-	}
-	catch(GraphicsInitEx giniterror)
-	{
-		std::cout<<giniterror.what()<<std::endl;
-	}
 }
 
 void Render::renderPlayBoard(Playboard& boardToBeRendered)
@@ -110,7 +104,7 @@ void Render::DrawPiece(const Piece& pieceToDraw, SDL_Rect *position )
 	{
 		for(char x=0; x<4; x++)
 		{
-			DrawTile(pieceToDraw.pieceObject[x][y],)
+			DrawTile(pieceToDraw.pieceObject[x][y],&pieceToDraw.PiecePosition);
 		}
 	}
 }
@@ -120,7 +114,7 @@ void Render::DrawNumber(int number, SDL_Rect *position )
 
 }
 
-void Render::DrawTile(ETileColor color, Position *position)
+void Render::DrawTile(ETileColor color,const Position *position)
 {
 	SDL_Rect tileSourceRect;
 	SDL_Rect tileDestinationRect;
@@ -134,18 +128,26 @@ void Render::DrawTile(ETileColor color, Position *position)
 	tileDestinationRect.w=tileSize;
 	tileDestinationRect.h=tileSize;
 
-	SDL_RenderCopy(windowRenderPointer,,&tileSourceRect,&tileDestinationRect);
+	SDL_RenderCopy(windowRenderPointer,NULL,&tileSourceRect,&tileDestinationRect);
 }
 
 std::shared_ptr<SDL_Texture>  Render::LoadBmpFile( const char* filename )
 {
+	try{
 	SDL_Surface *loadedFile=SDL_LoadBMP(filename);
 	if(!loadedFile)
 		throw GraphicsInitEx("Failed loading file");
 
-	std::shared_ptr<SDL_Texture> returnTexture;
-	returnTexture=SDL_CreateTextureFromSurface(gameRender.get()->getRenderer(),loadedFile);
+	std::shared_ptr<SDL_Texture> returnTexture(SDL_CreateTextureFromSurface(windowRenderPointer,loadedFile));
+	
 	return returnTexture;
+	}
+	catch(GraphicsInitEx ge)
+	{
+		std::cout<<ge.what()<<std::endl;
+	}
+	
+	return NULL;
 }
 
 

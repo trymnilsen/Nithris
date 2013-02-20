@@ -28,7 +28,7 @@ public:
 	void flipBuffers();
 	SDL_Renderer *getRenderer();
 private:
-	void DrawTile(ETileColor color,Position *position);
+	void DrawTile(ETileColor color,const Position *position);
 	void DrawNumber(int number, SDL_Rect *position);
 	void DrawWelcomeMessage();
 	void DrawPauseMessage();

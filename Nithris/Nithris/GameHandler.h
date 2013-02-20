@@ -20,9 +20,8 @@ public:
 	void initGame();
 	void runGame();
 	void cleanUpGame();
-	std::shared_ptr<SDL_Texture> getAsset(ETexture requestedAsset);
 private:
-	GameHandler();
+	GameHandler(){};
 	GameHandler(const GameHandler&);
 	GameHandler& operator=(const GameHandler&);
 	
@@ -33,7 +32,6 @@ private:
 	void startNewGame();
 	void getNewPiece();
 	void moveCurrentPiece();
-	std::shared_ptr<SDL_Texture> LoadAsset(const char* filename);
 	std::unique_ptr<Render> gameRender;
 	std::vector<std::shared_ptr<SDL_Texture>> Content;
 };
