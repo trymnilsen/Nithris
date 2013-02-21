@@ -5,7 +5,7 @@ enum ETileColor
 {
 	TC_NO_DRAW = -1,
 	TC_BACKGROUND,
-	TC_ORANGE,
+	TC_ORANGE ,
 	TC_RED,
 	TC_GREEN,
 	TC_BLUE,
@@ -33,11 +33,11 @@ enum ECollisionType
 };
 
 const unsigned char playboardTilesWidth = 10;
-const unsigned char playboardTilesHeight = 10;
-const unsigned char tileSize=16;
+const unsigned char playboardTilesHeight = 20;
+const unsigned char tileSize=32;
 const unsigned short PlayboardPixelsWidth = playboardTilesWidth*tileSize;
 const unsigned short PlayboardPixelsHeight = playboardTilesHeight*tileSize;
-const unsigned short ScoreBoardWidth=300;
+const unsigned short ScoreBoardWidth=256;
 const unsigned short ScoreBoardHeight=PlayboardPixelsHeight;
 
 #endif // !NITHRISCONSTANTS_H

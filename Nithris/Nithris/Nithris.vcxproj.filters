@@ -40,7 +40,7 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Piece.cpp">
-      <Filter>Source Files\Pieces</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -82,9 +82,6 @@
     </ClInclude>
     <ClInclude Include="Position.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BoxPiece.h">
-      <Filter>Header Files\Pieces</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

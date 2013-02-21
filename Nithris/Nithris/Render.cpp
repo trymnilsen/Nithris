@@ -19,14 +19,14 @@ void Render::renderInit()
 		}
 	}
 
-	gameWindowPointer=SDL_CreateWindow("Nithris changethis",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,300,550,SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+	gameWindowPointer=SDL_CreateWindow("Nithris changethis",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,PlayboardPixelsWidth+ScoreBoardWidth,PlayboardPixelsHeight,SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
 	if(gameWindowPointer==NULL)
 		throw GraphicsInitEx("Failed creating window");
 	windowRenderPointer=SDL_CreateRenderer(gameWindowPointer,-1,SDL_RENDERER_ACCELERATED);
 	if(windowRenderPointer==NULL)
 		throw GraphicsInitEx("Failed creating renderer for window");
 	//Set render color
-	SDL_SetRenderDrawColor(windowRenderPointer,0,0,0,255);
+	SDL_SetRenderDrawColor(windowRenderPointer,0,0,255,255);
 	brickTexture=LoadBmpFile("Assets/tiles_32x32.bmp");
 	scoreBoardTexture=LoadBmpFile("Assets/scoreboard_back.bmp");
 
@@ -34,14 +34,15 @@ void Render::renderInit()
 
 void Render::renderPlayBoard(std::shared_ptr<Playboard> boardToBeRendered)
 {
-	for(char y=0; y<playboardTilesHeight; y++)
+
+	for(unsigned char y=0; y<playboardTilesHeight; y++)
 	{
-		for(char x=0; x<playboardTilesWidth; x++)
+		for(unsigned char x=0; x<playboardTilesWidth; x++)
 		{
 			SDL_Rect tileSourceRect;
 			SDL_Rect tileDestinationRect;
-			const ETileColor tileColor = boardToBeRendered->colorOfTileAt(x,y);
-			tileSourceRect.x=tileColor*tileSize;
+			//const ETileColor tileColor = boardToBeRendered->colorOfTileAt(x,y);
+			tileSourceRect.x=6*tileSize;
 			tileSourceRect.y=0;
 			tileSourceRect.w=tileSize;
 			tileSourceRect.h=tileSize;
@@ -50,9 +51,9 @@ void Render::renderPlayBoard(std::shared_ptr<Playboard> boardToBeRendered)
 			tileDestinationRect.y=y*tileSize;
 			tileDestinationRect.w=tileSize;
 			tileDestinationRect.h=tileSize;
-
-			SDL_RenderCopy(windowRenderPointer,NULL,&tileSourceRect,&tileDestinationRect);
+			SDL_RenderCopy(windowRenderPointer,brickTexture.get(),&tileSourceRect,&tileDestinationRect);
 		}
+
 	}
 	
 }
@@ -76,7 +77,7 @@ void Render::promtUser(EPromtType& type)
 
 void Render::flipBuffers()
 {
-
+	SDL_RenderPresent(windowRenderPointer);
 }
 SDL_Renderer* Render::getRenderer()
 {
@@ -104,7 +105,13 @@ void Render::DrawPiece(Piece& pieceToDraw, SDL_Rect *position )
 	{
 		for(char x=0; x<4; x++)
 		{
-			DrawTile(pieceToDraw.getColorAt(x,y),&pieceToDraw.PiecePosition);
+			if(pieceToDraw.tileAt(x,y))
+			{
+				Position tilePosition;
+				tilePosition.X=position->x+x*tileSize;
+				tilePosition.Y=position->y+y*tileSize;
+				DrawTile(pieceToDraw.PieceColor,&tilePosition);
+			}
 		}
 	}
 }
@@ -139,7 +146,7 @@ std::shared_ptr<SDL_Texture>  Render::LoadBmpFile( const char* filename )
 		throw GraphicsInitEx("Failed loading file");
 
 	std::shared_ptr<SDL_Texture> returnTexture(SDL_CreateTextureFromSurface(windowRenderPointer,loadedFile));
-	
+	SDL_FreeSurface(loadedFile);
 	return returnTexture;
 	}
 	catch(GraphicsInitEx ge)

@@ -5,6 +5,7 @@ void GameHandler::initGame()
 	gameRender.swap(std::unique_ptr<Render>(new Render()));
 	gameRender->renderInit();
 	gameOver=false;
+	CurrentRound = std::unique_ptr<Round>(new Round());
 }
 
 void GameHandler::runGame()
@@ -28,6 +29,7 @@ void GameHandler::runGame()
 		{
 			renderPlayboard();
 			renderScoreBoard();
+			gameRender->flipBuffers();
 		}
 		inputTimer.SleepUntilUpdate();
 	}

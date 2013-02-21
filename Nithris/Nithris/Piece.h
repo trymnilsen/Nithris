@@ -1,18 +1,20 @@
 #ifndef PIECE_H
 #define PIECE_H
 
-#include <vector>
+#include <array>
 #include "NithrisConstants.h"
 #include "Position.h"
 
 class Piece 
 {
 public:
-	ETileColor& getColorAt(char x, char y);
-	virtual void SetColorAt(const ETileColor&, char x, char y)=0;
+	Piece();
+	bool tileAt(char x, char y);
+	void setTileAt(char x, char y);
 	Position PiecePosition;
+	ETileColor PieceColor;
 
 private:
-	std::vector<std::vector<ETileColor>> pieceObject;
+	std::array<std::array<bool,4>,4> pieceObject;
 };
 #endif // !PIECE_H

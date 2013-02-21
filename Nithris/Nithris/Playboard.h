@@ -3,16 +3,18 @@
 
 #include "Piece.h"
 #include "NithrisConstants.h"
-#include <vector>
+#include <array>
 
 class Playboard
 {
 public:
+	Playboard();
 	const ETileColor colorOfTileAt(char collum, char row);
 	bool setPieceAt(unsigned char collum,unsigned char row, Piece& piece);
 	void checkBoard();
 private:
-	std::vector<std::vector<ETileColor>> boardVector;
+	void initalizeBoard();
+	std::array<std::array<ETileColor,playboardTilesWidth>,playboardTilesHeight> boardArray;
 };
 
 #endif
