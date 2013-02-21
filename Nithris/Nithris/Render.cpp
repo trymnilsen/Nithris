@@ -72,12 +72,10 @@ void Render::renderScoreBoard(Piece& nextPiece, int currentScore, int highScore 
 	DrawNumber(currentScore,&piecePos);
 	DrawNumber(highScore,&piecePos);
 }
-
 void Render::promtUser(EPromtType& type)
 {
 
 }
-
 void Render::flipBuffers()
 {
 	SDL_RenderPresent(windowRenderPointer);

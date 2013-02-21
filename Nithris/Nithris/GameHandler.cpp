@@ -31,6 +31,7 @@ void GameHandler::runGame()
 			renderScoreBoard();
 			gameRender->flipBuffers();
 		}
+		InputManagerSDL::Instance().Update();
 		inputTimer.SleepUntilUpdate();
 	}
 
