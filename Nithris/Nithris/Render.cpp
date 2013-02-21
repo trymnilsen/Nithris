@@ -7,7 +7,9 @@ Render::Render()
 
 Render::~Render()
 {
-
+	SDL_DestroyRenderer(windowRenderPointer);
+	SDL_DestroyWindow(gameWindowPointer);
+	SDL_Quit();
 }
 void Render::renderInit()
 {

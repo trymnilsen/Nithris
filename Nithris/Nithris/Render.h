@@ -37,7 +37,6 @@ private:
 
 	SDL_Window *gameWindowPointer;
 	SDL_Renderer *windowRenderPointer;
-	SDL_Surface *backBuffer;
 
 	std::shared_ptr<SDL_Texture> brickTexture;
 	std::shared_ptr<SDL_Texture> numbersTexture;

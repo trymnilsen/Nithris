@@ -80,6 +80,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GameHandler.cpp" />
+    <ClCompile Include="InputManagerSDL.cpp" />
     <ClCompile Include="LoopTimer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Piece.cpp" />
@@ -90,7 +91,7 @@
   <ItemGroup>
     <ClInclude Include="GameHandler.h" />
     <ClInclude Include="GraphicsInitEx.h" />
-    <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="InputManagerSDL.h" />
     <ClInclude Include="LoopTimer.h" />
     <ClInclude Include="NithrisConstants.h" />
     <ClInclude Include="Piece.h" />

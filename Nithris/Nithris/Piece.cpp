@@ -10,6 +10,7 @@ Piece::Piece()
 		0,0,0,0
 	};
 	pieceObject=pieceLayout;
+	PieceColor=TC_GREEN;
 }
 bool Piece::tileAt(int x, int y )
 {
