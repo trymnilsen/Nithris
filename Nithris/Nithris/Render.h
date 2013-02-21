@@ -32,6 +32,7 @@ private:
 	void DrawWelcomeMessage();
 	void DrawPauseMessage();
 	void DrawGameOverMessage();
+	void DrawScoreboardBG();
 	std::shared_ptr<SDL_Texture> LoadBmpFile(const char* filename);
 
 	SDL_Window *gameWindowPointer;

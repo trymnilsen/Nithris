@@ -35,14 +35,14 @@ void Render::renderInit()
 void Render::renderPlayBoard(std::shared_ptr<Playboard> boardToBeRendered)
 {
 
-	for(unsigned char y=0; y<playboardTilesHeight; y++)
+	for(int y=0; y<playboardTilesHeight; y++)
 	{
-		for(unsigned char x=0; x<playboardTilesWidth; x++)
+		for(int x=0; x<playboardTilesWidth; x++)
 		{
 			SDL_Rect tileSourceRect;
 			SDL_Rect tileDestinationRect;
-			//const ETileColor tileColor = boardToBeRendered->colorOfTileAt(x,y);
-			tileSourceRect.x=6*tileSize;
+			const ETileColor tileColor = boardToBeRendered->colorOfTileAt(x,y);
+			tileSourceRect.x=tileColor*tileSize;
 			tileSourceRect.y=0;
 			tileSourceRect.w=tileSize;
 			tileSourceRect.h=tileSize;
@@ -61,10 +61,11 @@ void Render::renderPlayBoard(std::shared_ptr<Playboard> boardToBeRendered)
 void Render::renderScoreBoard(Piece& nextPiece, int currentScore, int highScore )
 {
 	SDL_Rect piecePos;
-	piecePos.x=playboardTilesWidth*tileSize+ScoreBoardWidth/2-2*tileSize;
+	piecePos.x=PlayboardPixelsWidth+50;
 	piecePos.y=50;
 	piecePos.w=4*tileSize;
 	piecePos.h=4*tileSize;
+	DrawScoreboardBG();
 	DrawPiece(nextPiece,&piecePos);
 	DrawNumber(currentScore,&piecePos);
 	DrawNumber(highScore,&piecePos);
@@ -101,9 +102,9 @@ void Render::DrawGameOverMessage()
 
 void Render::DrawPiece(Piece& pieceToDraw, SDL_Rect *position )
 {
-	for(char y=0; y<4; y++)
+	for(int y=0; y<4; y++)
 	{
-		for(char x=0; x<4; x++)
+		for(int x=0; x<4; x++)
 		{
 			if(pieceToDraw.tileAt(x,y))
 			{
@@ -135,7 +136,7 @@ void Render::DrawTile(ETileColor& color,Position *position)
 	tileDestinationRect.w=tileSize;
 	tileDestinationRect.h=tileSize;
 
-	SDL_RenderCopy(windowRenderPointer,NULL,&tileSourceRect,&tileDestinationRect);
+	SDL_RenderCopy(windowRenderPointer,brickTexture.get(),&tileSourceRect,&tileDestinationRect);
 }
 
 std::shared_ptr<SDL_Texture>  Render::LoadBmpFile( const char* filename )
@@ -155,6 +156,16 @@ std::shared_ptr<SDL_Texture>  Render::LoadBmpFile( const char* filename )
 	}
 	
 	return NULL;
+}
+
+void Render::DrawScoreboardBG()
+{
+	SDL_Rect destinationRect;
+	destinationRect.x=PlayboardPixelsWidth;
+	destinationRect.y=0;
+	destinationRect.w=ScoreBoardWidth;
+	destinationRect.h=ScoreBoardHeight;
+	SDL_RenderCopy(windowRenderPointer,scoreBoardTexture.get(),NULL,&destinationRect);
 }
 
 

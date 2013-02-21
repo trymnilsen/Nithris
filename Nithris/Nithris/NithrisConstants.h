@@ -32,12 +32,12 @@ enum ECollisionType
 	ECT_BRICK
 };
 
-const unsigned char playboardTilesWidth = 10;
-const unsigned char playboardTilesHeight = 20;
-const unsigned char tileSize=32;
-const unsigned short PlayboardPixelsWidth = playboardTilesWidth*tileSize;
-const unsigned short PlayboardPixelsHeight = playboardTilesHeight*tileSize;
-const unsigned short ScoreBoardWidth=256;
-const unsigned short ScoreBoardHeight=PlayboardPixelsHeight;
+const int playboardTilesWidth = 10;
+const int playboardTilesHeight = 20;
+const int tileSize=32;
+const short PlayboardPixelsWidth = playboardTilesWidth*tileSize;
+const short PlayboardPixelsHeight = playboardTilesHeight*tileSize;
+const short ScoreBoardWidth=256;
+const short ScoreBoardHeight=PlayboardPixelsHeight;
 
 #endif // !NITHRISCONSTANTS_H

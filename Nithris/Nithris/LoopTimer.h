@@ -49,7 +49,7 @@ public:
 
 	   NOTE: As with any kind of "sleep" functionality, we're not guaranteed to get control back at the 
 	         exact moment we want it, that's up to the OS (Windows) to handle. (99.9% of the time it 
-	         works like a charm though. :-) */
+	         works like a intm though. :-) */
 	void SleepUntilUpdate();
 
 	/* Returns true if it's time for a new update (unlike "SleepUntilUpdate()", above, this one 

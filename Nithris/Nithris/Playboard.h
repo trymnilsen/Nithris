@@ -9,12 +9,12 @@ class Playboard
 {
 public:
 	Playboard();
-	const ETileColor colorOfTileAt(char collum, char row);
-	bool setPieceAt(unsigned char collum,unsigned char row, Piece& piece);
+	const ETileColor colorOfTileAt(int collum, int row);
+	bool setPieceAt(int collum,int row, Piece& piece);
 	void checkBoard();
 private:
 	void initalizeBoard();
-	std::array<std::array<ETileColor,playboardTilesWidth>,playboardTilesHeight> boardArray;
+	std::array<std::array<ETileColor,playboardTilesHeight>,playboardTilesWidth> boardArray;
 };
 
 #endif

@@ -9,8 +9,8 @@ class Piece
 {
 public:
 	Piece();
-	bool tileAt(char x, char y);
-	void setTileAt(char x, char y);
+	bool tileAt(int x, int y);
+	void setTileAt(int x, int y);
 	Position PiecePosition;
 	ETileColor PieceColor;
 

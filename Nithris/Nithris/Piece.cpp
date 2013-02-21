@@ -11,12 +11,12 @@ Piece::Piece()
 	};
 	pieceObject=pieceLayout;
 }
-bool Piece::tileAt(char x, char y )
+bool Piece::tileAt(int x, int y )
 {
 	return pieceObject[x][y];
 }
 
-void Piece::setTileAt(char x, char y )
+void Piece::setTileAt(int x, int y )
 {
 
 }
