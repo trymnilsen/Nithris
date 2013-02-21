@@ -8,6 +8,8 @@
 #include "Render.h"
 #include "GraphicsInitEx.h"
 #include "NithrisConstants.h"
+#include "LoopTimer.h"
+#include "Round.h"
 
 class GameHandler
 {
@@ -32,8 +34,12 @@ private:
 	void startNewGame();
 	void getNewPiece();
 	void moveCurrentPiece();
+
 	std::unique_ptr<Render> gameRender;
-	std::vector<std::shared_ptr<SDL_Texture>> Content;
+	std::unique_ptr<Piece> CurrentPiece;
+	std::unique_ptr<Round> CurrentRound;
+	bool gameOver;
+	bool finishedPlaying;
 };
 
 #endif

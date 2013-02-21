@@ -1,11 +1,35 @@
 #ifndef NITHRISCONSTANTS_H
 #define NITHRISCONSTANTS_H
-enum ETexture{
-	BRICKS,
-	SCOREBOARD,
-	PAUSESCREEN,
-	WELCOMESCREEN,
-	ENDSCREEN
+
+enum ETileColor
+{
+	TC_NO_DRAW = -1,
+	TC_BACKGROUND,
+	TC_ORANGE,
+	TC_RED,
+	TC_GREEN,
+	TC_BLUE,
+	TC_CYAN,
+	TC_MAGENTA,
+	TC_YELLOW
+};
+enum EPromtType
+{
+	PROMT_NEWGAME,
+	PROMT_PAUSE,
+	PROMT_GAMEOVER
+};
+enum EDirection
+{
+	EDIR_LEFT,
+	EDIR_NOCHANGE,
+	EDIR_RIGHT,
+};
+enum ECollisionType
+{
+	ECT_NONE,
+	ECT_WALL,
+	ECT_BRICK
 };
 
 const unsigned char playboardTilesWidth = 10;

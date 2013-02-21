@@ -2,7 +2,7 @@
 #define PLAYBOARD_H
 
 #include "Piece.h"
-#include "TileColor.h"
+#include "NithrisConstants.h"
 #include <vector>
 
 class Playboard

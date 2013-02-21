@@ -32,7 +32,7 @@ void Render::renderInit()
 
 }
 
-void Render::renderPlayBoard(Playboard& boardToBeRendered)
+void Render::renderPlayBoard(std::shared_ptr<Playboard> boardToBeRendered)
 {
 	for(char y=0; y<playboardTilesHeight; y++)
 	{
@@ -40,7 +40,7 @@ void Render::renderPlayBoard(Playboard& boardToBeRendered)
 		{
 			SDL_Rect tileSourceRect;
 			SDL_Rect tileDestinationRect;
-			const ETileColor tileColor = boardToBeRendered.colorOfTileAt(x,y);
+			const ETileColor tileColor = boardToBeRendered->colorOfTileAt(x,y);
 			tileSourceRect.x=tileColor*tileSize;
 			tileSourceRect.y=0;
 			tileSourceRect.w=tileSize;
@@ -57,7 +57,7 @@ void Render::renderPlayBoard(Playboard& boardToBeRendered)
 	
 }
 
-void Render::renderScoreBoard(const Piece& nextPiece, int currentScore, int highScore )
+void Render::renderScoreBoard(Piece& nextPiece, int currentScore, int highScore )
 {
 	SDL_Rect piecePos;
 	piecePos.x=playboardTilesWidth*tileSize+ScoreBoardWidth/2-2*tileSize;
@@ -98,13 +98,13 @@ void Render::DrawGameOverMessage()
 
 }
 
-void Render::DrawPiece(const Piece& pieceToDraw, SDL_Rect *position )
+void Render::DrawPiece(Piece& pieceToDraw, SDL_Rect *position )
 {
 	for(char y=0; y<4; y++)
 	{
 		for(char x=0; x<4; x++)
 		{
-			DrawTile(pieceToDraw.pieceObject[x][y],&pieceToDraw.PiecePosition);
+			DrawTile(pieceToDraw.getColorAt(x,y),&pieceToDraw.PiecePosition);
 		}
 	}
 }
@@ -114,7 +114,7 @@ void Render::DrawNumber(int number, SDL_Rect *position )
 
 }
 
-void Render::DrawTile(ETileColor color,const Position *position)
+void Render::DrawTile(ETileColor& color,Position *position)
 {
 	SDL_Rect tileSourceRect;
 	SDL_Rect tileDestinationRect;

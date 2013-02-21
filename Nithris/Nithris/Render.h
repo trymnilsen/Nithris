@@ -9,7 +9,6 @@
 #include "SDL.h"
 #include "PromptType.h"
 #include "NithrisConstants.h"
-#include "TileColor.h"
 #include "GraphicsInitEx.h"
 #include "Playboard.h"
 #include "Position.h"
@@ -21,14 +20,14 @@ public:
 	Render();
 	~Render();
 	void renderInit();
-	void renderPlayBoard(Playboard& boardToBeRendered);
-	void renderScoreBoard(const Piece& nextPiece, int currentScore, int highScore);
-	void DrawPiece(const Piece& pieceToDraw, SDL_Rect *position);
+	void renderPlayBoard(std::shared_ptr<Playboard> boardToBeRendered);
+	void renderScoreBoard(Piece& nextPiece, int currentScore, int highScore);
+	void DrawPiece(Piece& pieceToDraw, SDL_Rect *position);
 	void promtUser(EPromtType& type);
 	void flipBuffers();
 	SDL_Renderer *getRenderer();
 private:
-	void DrawTile(ETileColor color,const Position *position);
+	void DrawTile(ETileColor& color,Position *position);
 	void DrawNumber(int number, SDL_Rect *position);
 	void DrawWelcomeMessage();
 	void DrawPauseMessage();

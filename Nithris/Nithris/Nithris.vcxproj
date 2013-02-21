@@ -82,8 +82,10 @@
     <ClCompile Include="GameHandler.cpp" />
     <ClCompile Include="LoopTimer.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Piece.cpp" />
     <ClCompile Include="Playboard.cpp" />
     <ClCompile Include="Render.cpp" />
+    <ClCompile Include="Round.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoxPiece.h" />

@@ -8,9 +8,12 @@
 class Round
 {
 public:
+	Round();
 	void generateNextPiece();
 	void getCurrentPiece();
 	std::shared_ptr<Playboard> getPlayboard();
+	//Constant reference as we never need to be able to change this, just know it
+	Piece& getNextPiece();
 
 private:
 	std::shared_ptr<Playboard> gamePlayboard;

@@ -16,6 +16,9 @@
     <Filter Include="Source Files\Pieces">
       <UniqueIdentifier>{48370b09-dcae-45cb-a43b-1c768d0306ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Pieces">
+      <UniqueIdentifier>{f9668947-9cbc-47b9-8b4c-e30283941dbd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -32,6 +35,12 @@
     </ClCompile>
     <ClCompile Include="LoopTimer.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Round.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Piece.cpp">
+      <Filter>Source Files\Pieces</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -71,11 +80,11 @@
     <ClInclude Include="Pieces\StraightPiece.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BoxPiece.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Position.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxPiece.h">
+      <Filter>Header Files\Pieces</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
