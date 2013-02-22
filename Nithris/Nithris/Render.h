@@ -22,7 +22,7 @@ public:
 	void renderInit();
 	void renderPlayBoard(std::shared_ptr<Playboard> boardToBeRendered);
 	void renderScoreBoard(Piece& nextPiece, int currentScore, int highScore);
-	void DrawPiece(Piece& pieceToDraw, SDL_Rect *position);
+	void DrawPiece(Piece& pieceToDraw, Position *position);
 	void promtUser(EPromtType& type);
 	void flipBuffers();
 	SDL_Renderer *getRenderer();

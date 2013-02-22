@@ -19,11 +19,13 @@ enum EPromtType
 	PROMT_PAUSE,
 	PROMT_GAMEOVER
 };
-enum EDirection
+enum EMovement
 {
 	EDIR_LEFT,
 	EDIR_NOCHANGE,
 	EDIR_RIGHT,
+	EDIR_DROP,
+	EDIR_ROTATE
 };
 enum ECollisionType
 {

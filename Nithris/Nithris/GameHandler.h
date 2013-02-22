@@ -10,6 +10,7 @@
 #include "NithrisConstants.h"
 #include "LoopTimer.h"
 #include "Round.h"
+#include "InputManagerSDL.h"
 
 class GameHandler
 {
@@ -33,13 +34,15 @@ private:
 	void processPlayboard();
 	void startNewGame();
 	void getNewPiece();
-	void moveCurrentPiece();
+	void movePiece(EMovement wantedMove);
+	ECollisionType checkCollision(std::shared_ptr<Piece> piece);
 
 	std::unique_ptr<Render> gameRender;
 	std::unique_ptr<Piece> CurrentPiece;
 	std::unique_ptr<Round> CurrentRound;
 	bool gameOver;
 	bool finishedPlaying;
+	EMovement RequestedDirection;
 };
 
 #endif

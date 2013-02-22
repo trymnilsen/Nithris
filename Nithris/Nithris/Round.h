@@ -10,14 +10,15 @@ class Round
 public:
 	Round();
 	void generateNextPiece();
-	void getCurrentPiece();
+	std::shared_ptr<Piece> getCurrentPiece();
 	std::shared_ptr<Playboard> getPlayboard();
-	//Constant reference as we never need to be able to change this, just know it
+	void setCurrentPiece(std::shared_ptr<Piece> pieceToSet);
 	Piece& getNextPiece();
 
 private:
 	std::shared_ptr<Playboard> gamePlayboard;
-	std::unique_ptr<Piece> nextPiece;
+	std::shared_ptr<Piece> nextPiece;
+	std::shared_ptr<Piece> CurrentPiece;
 	int score;
 };
 #endif

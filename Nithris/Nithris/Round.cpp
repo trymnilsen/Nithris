@@ -3,7 +3,8 @@
 Round::Round()
 {
 	gamePlayboard.swap(std::shared_ptr<Playboard>(new Playboard()));
-	nextPiece=std::unique_ptr<Piece>(new Piece());
+	nextPiece=std::shared_ptr<Piece>(new Piece());
+	CurrentPiece=std::shared_ptr<Piece>(new Piece());
 	score=0;
 }
 
@@ -12,9 +13,9 @@ void Round::generateNextPiece()
 	
 }
 
-void Round::getCurrentPiece()
+std::shared_ptr<Piece> Round::getCurrentPiece()
 {
-	
+	return CurrentPiece;
 }
 
 std::shared_ptr<Playboard> Round::getPlayboard()
@@ -25,6 +26,11 @@ std::shared_ptr<Playboard> Round::getPlayboard()
 Piece& Round::getNextPiece()
 {
 	return *nextPiece.get();
+}
+
+void Round::setCurrentPiece(std::shared_ptr<Piece> pieceToSet)
+{
+	CurrentPiece = pieceToSet;
 }
 
 

@@ -10,9 +10,16 @@ const ETileColor Playboard::colorOfTileAt(int collum, int row )
 	return returnColor;
 }
 
-bool Playboard::setPieceAt(int collum,int row, Piece& piece )
+void Playboard::setPieceAt(int collum,int row, Piece& piece )
 {
-	return true;
+	for(int y=0; y<4; y++)
+	{
+		for(int x=0; x<4; x++)
+		{
+			if(piece.tileAt(x,y))
+			boardArray[collum+x][row+y]=piece.PieceColor;
+		}
+	}
 }
 
 void Playboard::checkBoard()

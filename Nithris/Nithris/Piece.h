@@ -2,6 +2,7 @@
 #define PIECE_H
 
 #include <array>
+#include <memory>
 #include "NithrisConstants.h"
 #include "Position.h"
 
@@ -11,7 +12,11 @@ public:
 	Piece();
 	bool tileAt(int x, int y);
 	void setTileAt(int x, int y);
-	Position PiecePosition;
+	void nudge(char tiles);
+	void dropOne();
+	void dropDown(char NumberOfTiles);
+	std::shared_ptr<Piece> CreateGhost(EMovement movement);
+	Position piecePosition;
 	ETileColor PieceColor;
 
 private:

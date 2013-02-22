@@ -10,7 +10,7 @@ class Playboard
 public:
 	Playboard();
 	const ETileColor colorOfTileAt(int collum, int row);
-	bool setPieceAt(int collum,int row, Piece& piece);
+	void setPieceAt(int collum,int row, Piece& piece);
 	void checkBoard();
 private:
 	void initalizeBoard();
