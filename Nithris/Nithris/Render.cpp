@@ -17,11 +17,11 @@ void Render::renderInit()
 	{
 		if(0>SDL_Init(SDL_INIT_VIDEO))
 		{
-			throw GraphicsInitEx("Test");
+			throw GraphicsInitEx("Could not initialize SDL");
 		}
 	}
 
-	gameWindowPointer=SDL_CreateWindow("Nithris changethis",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,PlayboardPixelsWidth+ScoreBoardWidth,PlayboardPixelsHeight,SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
+	gameWindowPointer=SDL_CreateWindow("Nithris",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,PlayboardPixelsWidth+ScoreBoardWidth,PlayboardPixelsHeight,SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
 	if(gameWindowPointer==NULL)
 		throw GraphicsInitEx("Failed creating window");
 	windowRenderPointer=SDL_CreateRenderer(gameWindowPointer,-1,SDL_RENDERER_ACCELERATED);
@@ -31,6 +31,8 @@ void Render::renderInit()
 	SDL_SetRenderDrawColor(windowRenderPointer,0,0,255,255);
 	brickTexture=LoadBmpFile("Assets/tiles_32x32.bmp");
 	scoreBoardTexture=LoadBmpFile("Assets/scoreboard_back.bmp");
+	numbersTexture=LoadBmpFile("Assets/numbers_32x32.bmp");
+
 
 }
 
@@ -115,9 +117,17 @@ void Render::DrawPiece(Piece& pieceToDraw, Position *position)
 	}
 }
 
-void Render::DrawNumber(int number, SDL_Rect *position )
+void Render::DrawNumber(unsigned short number, Position *position )
 {
-
+	// Render the scoretext output.
+	unsigned short tempScore = number;
+	unsigned short finalDigit = 0;
+	for (unsigned short usDigitSpot = 0; usDigitSpot < 4; ++usDigitSpot)
+	{
+		finalDigit = tempScore % 10;
+		tempScore /= 10;
+		DrawScoreDigit(position->X + (3 - usDigitSpot), position->Y, finalDigit);
+	}
 }
 
 void Render::DrawTile(ETileColor& color,Position *position)
@@ -165,5 +175,24 @@ void Render::DrawScoreboardBG()
 	destinationRect.h=ScoreBoardHeight;
 	SDL_RenderCopy(windowRenderPointer,scoreBoardTexture.get(),NULL,&destinationRect);
 }
+void Render::DrawScoreDigit(short sPosX, short sPosY, unsigned short usDigit) 
+{
+	SDL_Rect oScreenRect;  // Part of screen we want to draw to.
+	SDL_Rect oNumberRect;  // Part of the number-bmp-file (all numbers are stored in a single bmp, and we use a small part of it) we want to draw from.
+
+	oScreenRect.x = sPosX; 
+	oScreenRect.y = sPosY;
+	oScreenRect.w = tileSize;
+	oScreenRect.h = tileSize;
+
+	oNumberRect.x = usDigit * tileSize;   
+	oNumberRect.y = 0;
+	oNumberRect.w = tileSize;   
+	oNumberRect.h = tileSize;
+
+	// When positions are set, blit the wanted tile to the screen.
+	SDL_RenderCopy(windowRenderPointer, numbersTexture.get(), &oNumberRect, &oScreenRect);
+
+}  // END _DrawScoreDigit
 
 

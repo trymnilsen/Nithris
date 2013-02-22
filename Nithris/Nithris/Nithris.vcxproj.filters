@@ -77,9 +77,6 @@
     <ClInclude Include="LoopTimer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Pieces\StraightPiece.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Position.h">
       <Filter>Header Files</Filter>
     </ClInclude>

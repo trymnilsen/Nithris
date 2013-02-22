@@ -95,7 +95,6 @@
     <ClInclude Include="LoopTimer.h" />
     <ClInclude Include="NithrisConstants.h" />
     <ClInclude Include="Piece.h" />
-    <ClInclude Include="Pieces\StraightPiece.h" />
     <ClInclude Include="Playboard.h" />
     <ClInclude Include="Position.h" />
     <ClInclude Include="PromptType.h" />

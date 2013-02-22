@@ -28,13 +28,14 @@ public:
 	SDL_Renderer *getRenderer();
 private:
 	void DrawTile(ETileColor& color,Position *position);
-	void DrawNumber(int number, SDL_Rect *position);
+	void DrawNumber(unsigned short number,Position *position);
 	void DrawWelcomeMessage();
 	void DrawPauseMessage();
 	void DrawGameOverMessage();
 	void DrawScoreboardBG();
-	std::shared_ptr<SDL_Texture> LoadBmpFile(const char* filename);
+	void DrawScoreDigit(short sPosX, short sPosY, unsigned short usDigit);
 
+	std::shared_ptr<SDL_Texture> LoadBmpFile(const char* filename);
 	SDL_Window *gameWindowPointer;
 	SDL_Renderer *windowRenderPointer;
 
