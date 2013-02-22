@@ -83,12 +83,16 @@ void GameHandler::renderPlayboard()
 
 void GameHandler::renderScoreBoard()
 {
-	gameRender->renderScoreBoard(CurrentRound->getNextPiece(),1000,50);
+	gameRender->renderScoreBoard(CurrentRound->getNextPiece(),CurrentRound->score,50);
 }
 
 void GameHandler::processPlayboard()
 {
-
+	bool hasRowsBeenRemoved=CurrentRound->getPlayboard()->checkBoard();
+	if(hasRowsBeenRemoved)
+	{
+		CurrentRound->score+=100;
+	}
 }
 
 void GameHandler::startNewGame()

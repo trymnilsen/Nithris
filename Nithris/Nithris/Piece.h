@@ -6,6 +6,7 @@
 #include "NithrisConstants.h"
 #include "Position.h"
 
+
 class Piece 
 {
 public:
@@ -15,6 +16,7 @@ public:
 	void nudge(char tiles);
 	void dropOne();
 	void dropDown(char NumberOfTiles);
+	void rotate();
 	std::shared_ptr<Piece> CreateGhost(EMovement movement);
 	Position piecePosition;
 	ETileColor PieceColor;

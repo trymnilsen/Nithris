@@ -22,8 +22,30 @@ void Playboard::setPieceAt(int collum,int row, Piece& piece )
 	}
 }
 
-void Playboard::checkBoard()
+bool Playboard::checkBoard()
 {
+	bool hasLinesBeenRemoved=false;
+	for(short y=0; y<playboardTilesHeight; ++y)
+	{
+		bool fullLine=false;
+		for(short x=0; x<playboardTilesWidth; ++x)
+		{
+			if(boardArray[x][y]>0)
+			{
+				fullLine=true;
+			}
+			else
+			{
+				fullLine=false;
+			}
+		}
+		if(fullLine)
+		{
+			hasLinesBeenRemoved=true;
+			moveBricksdown(y);
+		}
+	}
+	return hasLinesBeenRemoved;
 	
 }
 
@@ -34,6 +56,17 @@ void Playboard::initalizeBoard()
 		for (int x=0; x<playboardTilesWidth; x++)
 		{
 			boardArray[x][y]=TC_BACKGROUND;
+		}
+	}
+}
+
+void Playboard::moveBricksdown(short lineToRemove)
+{
+	for(short y=lineToRemove; y>0; --y)
+	{
+		for(short x=0; x<playboardTilesWidth; ++x)
+		{
+			boardArray[x][y]=boardArray[x][y-1];
 		}
 	}
 }

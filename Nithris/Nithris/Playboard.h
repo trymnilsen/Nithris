@@ -11,7 +11,8 @@ public:
 	Playboard();
 	const ETileColor colorOfTileAt(int collum, int row);
 	void setPieceAt(int collum,int row, Piece& piece);
-	void checkBoard();
+	bool checkBoard();
+	void moveBricksdown(short lineToRemove);
 private:
 	void initalizeBoard();
 	std::array<std::array<ETileColor,playboardTilesHeight>,playboardTilesWidth> boardArray;

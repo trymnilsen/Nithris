@@ -67,10 +67,16 @@ void Render::renderScoreBoard(Piece& nextPiece, int currentScore, int highScore 
 	Position nextPiecePos;
 	nextPiecePos.X=400;
 	nextPiecePos.Y=50;
+	Position scorePos;
+	scorePos.X=PlayboardPixelsWidth+40;
+	scorePos.Y=340;
+	Position highscorePos;
+	highscorePos.X=PlayboardPixelsWidth+40;
+	highscorePos.Y=430;
 	DrawScoreboardBG();
 	DrawPiece(nextPiece,&nextPiecePos);
-	//DrawNumber(currentScore,&nextPiecePos);
-	//DrawNumber(highScore,&nextPiecePos);
+	DrawNumber(currentScore,&scorePos);
+	DrawNumber(highScore,&highscorePos);
 }
 void Render::promtUser(EPromtType& type)
 {
@@ -126,7 +132,7 @@ void Render::DrawNumber(unsigned short number, Position *position )
 	{
 		finalDigit = tempScore % 10;
 		tempScore /= 10;
-		DrawScoreDigit(position->X + (3 - usDigitSpot), position->Y, finalDigit);
+		DrawScoreDigit(position->X + (3 - usDigitSpot)*tileSize, position->Y, finalDigit);
 	}
 }
 
@@ -190,7 +196,7 @@ void Render::DrawScoreDigit(short sPosX, short sPosY, unsigned short usDigit)
 	oNumberRect.w = tileSize;   
 	oNumberRect.h = tileSize;
 
-	// When positions are set, blit the wanted tile to the screen.
+	// When positions are set, the wanted tile to the screen.
 	SDL_RenderCopy(windowRenderPointer, numbersTexture.get(), &oNumberRect, &oScreenRect);
 
 }  // END _DrawScoreDigit
