@@ -11,12 +11,14 @@ class Piece
 {
 public:
 	Piece();
+	Piece(Piece& pieceClone);
 	bool tileAt(int x, int y);
 	void setTileAt(int x, int y);
 	void nudge(char tiles);
 	void dropOne();
 	void dropDown(char NumberOfTiles);
 	void rotate();
+	const std::array<std::array<bool,4>,4> getPieceArray() {return pieceObject;}
 	std::shared_ptr<Piece> CreateGhost(EMovement movement);
 	Position piecePosition;
 	ETileColor PieceColor;

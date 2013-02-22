@@ -16,6 +16,13 @@ Piece::Piece()
 	position.Y=1;
 	piecePosition=position;
 }
+
+Piece::Piece(Piece& pieceClone)
+{
+	PieceColor=pieceClone.PieceColor;
+	pieceObject=pieceClone.getPieceArray();
+}
+
 bool Piece::tileAt(int x, int y )
 {
 	return pieceObject[x][y];
@@ -52,7 +59,7 @@ void Piece::dropDown(char numberOfTiles)
 
 std::shared_ptr<Piece> Piece::CreateGhost(EMovement movement)
 {
-	std::shared_ptr<Piece> ghost = std::shared_ptr<Piece>(new Piece());
+	std::shared_ptr<Piece> ghost = std::shared_ptr<Piece>(new Piece(*this));
 	Position ghostPos;
 	switch (movement)
 	{
