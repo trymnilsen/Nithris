@@ -12,18 +12,20 @@ class Piece
 public:
 	Piece();
 	Piece(Piece& pieceClone);
+	//virtual ~Piece();
 	bool tileAt(int x, int y);
 	void setTileAt(int x, int y);
 	void nudge(char tiles);
 	void dropOne();
 	void dropDown(char NumberOfTiles);
 	void rotate();
+	void Transform(std::shared_ptr<Piece> transformTarget,EMovement movement);
 	const std::array<std::array<bool,4>,4> getPieceArray() {return pieceObject;}
-	std::shared_ptr<Piece> CreateGhost(EMovement movement);
+	virtual std::shared_ptr<Piece> CreateGhost(EMovement movement) = 0;
 	Position piecePosition;
 	ETileColor PieceColor;
 
-private:
+protected:
 	std::array<std::array<bool,4>,4> pieceObject;
 };
 #endif // !PIECE_H

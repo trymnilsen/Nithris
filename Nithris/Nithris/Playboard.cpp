@@ -37,6 +37,7 @@ bool Playboard::checkBoard()
 			else
 			{
 				fullLine=false;
+				break;
 			}
 		}
 		if(fullLine)

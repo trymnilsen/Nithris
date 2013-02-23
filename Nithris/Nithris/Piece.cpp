@@ -2,15 +2,6 @@
 
 Piece::Piece()
 {
-	
-	std::array<std::array<bool,4>,4> pieceLayout  = {
-		0,0,0,0,
-		1,1,1,0,
-		1,0,0,0,
-		0,0,0,0
-	};
-	pieceObject=pieceLayout;
-	PieceColor=TC_GREEN;
 	Position position;
 	position.X=3;
 	position.Y=1;
@@ -19,6 +10,7 @@ Piece::Piece()
 
 Piece::Piece(Piece& pieceClone)
 {
+	piecePosition=pieceClone.piecePosition;
 	PieceColor=pieceClone.PieceColor;
 	pieceObject=pieceClone.getPieceArray();
 }
@@ -57,38 +49,6 @@ void Piece::dropDown(char numberOfTiles)
 		piecePosition=newPosition;
 }
 
-std::shared_ptr<Piece> Piece::CreateGhost(EMovement movement)
-{
-	std::shared_ptr<Piece> ghost = std::shared_ptr<Piece>(new Piece(*this));
-	Position ghostPos;
-	switch (movement)
-	{
-	case EDIR_LEFT:
-		ghostPos.X=piecePosition.X-1;
-		ghostPos.Y=piecePosition.Y;
-		ghost->piecePosition=ghostPos;
-		break;
-	case EDIR_RIGHT:
-		ghostPos.X=piecePosition.X+1;
-		ghostPos.Y=piecePosition.Y;
-		ghost->piecePosition=ghostPos;
-		break;
-	case EDIR_ROTATE:
-		ghostPos.X=piecePosition.X;
-		ghostPos.Y=piecePosition.Y;
-		ghost->piecePosition=ghostPos;
-		ghost->rotate();
-		break;
-	case EDIR_DROP:
-		ghostPos.X=piecePosition.X;
-		ghostPos.Y=piecePosition.Y+1;
-		ghost->piecePosition=ghostPos;
-		break;
-	default:
-		break;
-	}
-	return ghost;
-}
 
 void Piece::rotate()
 {
@@ -109,6 +69,27 @@ void Piece::rotate()
 		}
 	}
 	pieceObject=newOrientation;
+}
+
+void Piece::Transform(std::shared_ptr<Piece> transformTarget,EMovement movement )
+{
+	switch (movement)
+	{
+	case EDIR_LEFT:
+		transformTarget->piecePosition.X=transformTarget->piecePosition.X-1;
+		break;
+	case EDIR_RIGHT:
+		transformTarget->piecePosition.X=transformTarget->piecePosition.X+1;
+		break;
+	case EDIR_ROTATE:
+		transformTarget->rotate();
+		break;
+	case EDIR_DROP:
+		transformTarget->piecePosition.Y=transformTarget->piecePosition.Y+1;
+		break;
+	default:
+		break;
+	}
 }
 
 

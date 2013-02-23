@@ -13,11 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Pieces">
-      <UniqueIdentifier>{48370b09-dcae-45cb-a43b-1c768d0306ef}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Pieces">
-      <UniqueIdentifier>{f9668947-9cbc-47b9-8b4c-e30283941dbd}</UniqueIdentifier>
+      <UniqueIdentifier>{d6711e6d-d85a-4073-84e9-00738cb2b489}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Pieces">
+      <UniqueIdentifier>{3b9e813b-03eb-4cd4-afce-3e017624dcd4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -44,6 +44,12 @@
     </ClCompile>
     <ClCompile Include="InputManagerSDL.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PieceFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxPiece.cpp">
+      <Filter>Source Files\Pieces</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +88,12 @@
     </ClInclude>
     <ClInclude Include="InputManagerSDL.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PieceFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BoxPiece.h">
+      <Filter>Header Files\Pieces</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -95,6 +95,7 @@ void GameHandler::processPlayboard()
 	}
 }
 
+
 void GameHandler::startNewGame()
 {
 

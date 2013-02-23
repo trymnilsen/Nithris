@@ -79,22 +79,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BoxPiece.cpp" />
     <ClCompile Include="GameHandler.cpp" />
     <ClCompile Include="InputManagerSDL.cpp" />
     <ClCompile Include="LoopTimer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Piece.cpp" />
+    <ClCompile Include="PieceFactory.cpp" />
     <ClCompile Include="Playboard.cpp" />
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="Round.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BoxPiece.h" />
     <ClInclude Include="GameHandler.h" />
     <ClInclude Include="GraphicsInitEx.h" />
     <ClInclude Include="InputManagerSDL.h" />
     <ClInclude Include="LoopTimer.h" />
     <ClInclude Include="NithrisConstants.h" />
     <ClInclude Include="Piece.h" />
+    <ClInclude Include="PieceFactory.h" />
     <ClInclude Include="Playboard.h" />
     <ClInclude Include="Position.h" />
     <ClInclude Include="PromptType.h" />

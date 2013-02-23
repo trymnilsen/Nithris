@@ -1,10 +1,11 @@
 #include "Round.h"
+#include "PieceFactory.h"
 
 Round::Round()
 {
 	gamePlayboard.swap(std::shared_ptr<Playboard>(new Playboard()));
-	nextPiece=std::shared_ptr<Piece>(new Piece());
-	CurrentPiece=std::shared_ptr<Piece>(new Piece());
+	nextPiece=PieceFactory::instance().GenerateRandomPiece();
+	CurrentPiece=PieceFactory::instance().GenerateRandomPiece();
 	score=0;
 }
 
