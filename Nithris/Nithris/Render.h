@@ -42,6 +42,9 @@ private:
 	std::shared_ptr<SDL_Texture> brickTexture;
 	std::shared_ptr<SDL_Texture> numbersTexture;
 	std::shared_ptr<SDL_Texture> scoreBoardTexture;
+	std::shared_ptr<SDL_Texture> welcomeTexture;
+	std::shared_ptr<SDL_Texture> pauseTexture;
+	std::shared_ptr<SDL_Texture> gameOverTexture;
 
 	
 };

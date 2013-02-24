@@ -32,6 +32,9 @@ void Render::renderInit()
 	brickTexture=LoadBmpFile("Assets/tiles_32x32.bmp");
 	scoreBoardTexture=LoadBmpFile("Assets/scoreboard_back.bmp");
 	numbersTexture=LoadBmpFile("Assets/numbers_32x32.bmp");
+	welcomeTexture=LoadBmpFile("Assets/startup.bmp");
+	pauseTexture=LoadBmpFile("Assets/pause.bmp");
+	gameOverTexture=LoadBmpFile("Assets/gameover.bmp");
 
 
 }
@@ -80,7 +83,20 @@ void Render::renderScoreBoard(Piece& nextPiece, int currentScore, int highScore 
 }
 void Render::promtUser(EPromtType& type)
 {
-
+	switch (type)
+	{
+	case PROMT_NEWGAME:
+		DrawWelcomeMessage();
+		break;
+	case PROMT_GAMEOVER:
+		DrawGameOverMessage();
+		break;
+	case PROMT_PAUSE:
+		DrawPauseMessage();
+		break;
+	default:
+		break;
+	}
 }
 void Render::flipBuffers()
 {
@@ -93,17 +109,38 @@ SDL_Renderer* Render::getRenderer()
 
 void Render::DrawWelcomeMessage()
 {
+	SDL_Rect tileDestinationRect;
 
+	tileDestinationRect.x=200;
+	tileDestinationRect.y=140;
+	tileDestinationRect.w=tileSize;
+	tileDestinationRect.h=tileSize;
+
+	SDL_RenderCopy(windowRenderPointer,welcomeTexture.get(),NULL,&tileDestinationRect);
 }
 
 void Render::DrawPauseMessage()
 {
+	SDL_Rect tileDestinationRect;
 
+	tileDestinationRect.x=200;
+	tileDestinationRect.y=140;
+	tileDestinationRect.w=tileSize;
+	tileDestinationRect.h=tileSize;
+
+	SDL_RenderCopy(windowRenderPointer,pauseTexture.get(),NULL,&tileDestinationRect);
 }
 
 void Render::DrawGameOverMessage()
 {
+	SDL_Rect tileDestinationRect;
 
+	tileDestinationRect.x=200;
+	tileDestinationRect.y=140;
+	tileDestinationRect.w=tileSize;
+	tileDestinationRect.h=tileSize;
+
+	SDL_RenderCopy(windowRenderPointer,gameOverTexture.get(),NULL,&tileDestinationRect);
 }
 
 void Render::DrawPiece(Piece& pieceToDraw, Position *position)

@@ -42,6 +42,8 @@ private:
 	std::unique_ptr<Round> CurrentRound;
 	bool gameOver;
 	bool finishedPlaying;
+	bool MenuActive;
+	EPromtType activeMenu;
 	EMovement RequestedDirection;
 
 	LoopTimer inputTimer;

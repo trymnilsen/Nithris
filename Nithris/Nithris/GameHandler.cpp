@@ -24,7 +24,7 @@ void GameHandler::runGame()
 	MovementTickTimer.Start();
 	while(!gameOver)
 	{
-		if(MovementTickTimer.IsTimeForUpdate())
+		if(MovementTickTimer.IsTimeForUpdate() && !MenuActive)
 		{
 			movePiece(EDIR_DROP);
 			RequestedDirection=EDIR_NOCHANGE;
@@ -32,9 +32,16 @@ void GameHandler::runGame()
 		}
 		if(updateTimer.IsTimeForUpdate())
 		{
-			movePiece(RequestedDirection);
-			RequestedDirection=EDIR_NOCHANGE;
-
+			
+			if(!MenuActive)
+			{
+				movePiece(RequestedDirection);
+				RequestedDirection=EDIR_NOCHANGE;
+			}
+			else
+			{
+				gameRender->promtUser(activeMenu);
+			}
 			renderPlayboard();
 			renderScoreBoard();
 			gameRender->DrawPiece(*CurrentRound->getCurrentPiece().get(),&CurrentRound->getCurrentPiece()->piecePosition);
