@@ -13,6 +13,7 @@ void GameHandler::initGame()
 	activeMenu=PROMT_NEWGAME;
 	MenuActive=true;
 	gameOver=false;
+	highScore=0;
 	//Timers
 	inputTimer.SetUpdatesPerInterval(1000);
 	updateTimer.SetUpdatesPerInterval(100);
@@ -112,7 +113,7 @@ void GameHandler::renderPlayboard()
 void GameHandler::renderScoreBoard()
 {
 	//renders the scoreboard
-	gameRender->renderScoreBoard(*CurrentRound->getNextPiece().get(),CurrentRound->score,50);
+	gameRender->renderScoreBoard(*CurrentRound->getNextPiece().get(),CurrentRound->score,highScore);
 }
 
 void GameHandler::processPlayboard()
@@ -260,6 +261,9 @@ void GameHandler::MenuInput()
 		if(InputManagerSDL::Instance().KeyDown(SDL_SCANCODE_SPACE))
 		{
 			//new game selected create a new round.. The old uniquepointer is replaced and the references is not used therefor the unique_pointer should be deallocated
+			if(highScore<CurrentRound->score)
+				highScore=CurrentRound->score;
+
 			CurrentRound=std::unique_ptr<Round>(new Round());
 			MenuActive=false;
 		}

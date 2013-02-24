@@ -49,6 +49,7 @@ private:
 	//is the game over, or should we prompt the user?
 	bool gameOver;
 	bool MenuActive;
+	int highScore;
 	EPromtType activeMenu;
 	//what does the user want to do?
 	EMovement RequestedDirection;
