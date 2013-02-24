@@ -1,3 +1,5 @@
+//PG4400 - INNLEVERING 1 - TRYM NILSEN
+//exception class for fatal exceptions i ended up not using :P
 #ifndef FATALRUNTIMEEX_H
 #define FATALRUNTIMEEX_H
 

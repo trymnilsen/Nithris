@@ -1,6 +1,7 @@
+//PG4400 - INNLEVERING 1 - TRYM NILSEN
 #ifndef NITHRISCONSTANTS_H
 #define NITHRISCONSTANTS_H
-
+//Enum defining the color a tile can have
 enum ETileColor
 {
 	TC_NO_DRAW = -1,
@@ -13,12 +14,14 @@ enum ETileColor
 	TC_MAGENTA,
 	TC_YELLOW
 };
+//enum defining our menu promt types
 enum EPromtType
 {
 	PROMT_NEWGAME,
 	PROMT_PAUSE,
 	PROMT_GAMEOVER
 };
+//Enum defining the different movements or piece operations
 enum EMovement
 {
 	EDIR_LEFT,
@@ -27,13 +30,25 @@ enum EMovement
 	EDIR_DROP,
 	EDIR_ROTATE
 };
+//Enum define diffent collision types
 enum ECollisionType
 {
 	ECT_NONE,
 	ECT_WALL,
 	ECT_BRICK
 };
+/*
+    , |\/| ,
+   /| (..) |\
+  /  \(oo)/  \
+ /    /''\    \
+/    /\  /\    \
+\/\/`\ \/ /`\/\/
+^^-^^^^-^^^^^-^^^^ 
+Here be dragons,
+dont change this stuff as wrong values WILL make the program crash
 
+*/
 const int playboardTilesWidth = 10;
 const int playboardTilesHeight = 20;
 const int tileSize=32;

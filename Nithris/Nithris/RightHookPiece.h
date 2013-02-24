@@ -1,3 +1,5 @@
+//PG4400 - INNLEVERING 1 - TRYM NILSEN
+//see piece.h for explanation of the logic behind the pieces
 #ifndef RIGHTHOOKPIECE_H
 #define RIGHTHOOKPIECE_H
 

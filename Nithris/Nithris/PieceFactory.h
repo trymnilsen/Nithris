@@ -1,3 +1,4 @@
+//PG4400 - INNLEVERING 1 - TRYM NILSEN
 #ifndef PIECEFACTORY_H
 #define PIECEFACTORY_H
 
@@ -17,7 +18,7 @@
 #include "PolePiece.h"
 #include "TPiece.h"
 
-
+//Mayers Singleton piecefactoy generating a random piece
 class PieceFactory
 {
 public:
@@ -26,6 +27,7 @@ public:
 		static PieceFactory gh;
 		return gh;
 	}
+	//genereates and returns a shared_ptr to the random piece
 	std::shared_ptr<Piece> GenerateRandomPiece();
 private:
 	PieceFactory(){};

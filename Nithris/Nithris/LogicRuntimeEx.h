@@ -1,3 +1,5 @@
+//PG4400 - INNLEVERING 1 - TRYM NILSEN
+//also an exception class i ended up not using
 #ifndef LOGICRUNTIMEEX_H
 #define LOGICRUNTIMEEX_H
 

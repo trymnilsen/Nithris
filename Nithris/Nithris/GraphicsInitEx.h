@@ -1,3 +1,5 @@
+//PG4400 - INNLEVERING 1 - TRYM NILSEN
+//excpetion class for initialization for graphics
 #ifndef GRAPHICSINITEX_H
 #define GRAPHICSINITEX_H
 

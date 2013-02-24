@@ -25,31 +25,6 @@ void Piece::setTileAt(int x, int y )
 	pieceObject[x][y]=1;
 }
 
-void Piece::nudge(char tiles)
-{
-	Position newPosition;
-	newPosition.X=piecePosition.X+tiles;
-	newPosition.Y=piecePosition.Y;
-	piecePosition=newPosition;
-}
-
-void Piece::dropOne()
-{
-	Position newPosition;
-	newPosition.X=piecePosition.X;
-	newPosition.Y=piecePosition.Y+1;
-	piecePosition=newPosition;
-}
-
-void Piece::dropDown(char numberOfTiles)
-{
-		Position newPosition;
-		newPosition.X=piecePosition.X;
-		newPosition.Y=piecePosition.Y+numberOfTiles;
-		piecePosition=newPosition;
-}
-
-
 void Piece::rotate()
 {
 	std::array<std::array<bool,4>,4> newOrientation  = {

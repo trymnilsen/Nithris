@@ -1,3 +1,4 @@
+//PG4400 - INNLEVERING 1 - TRYM NILSEN
 #ifndef PIECE_H
 #define PIECE_H
 
@@ -6,7 +7,9 @@
 #include "NithrisConstants.h"
 #include "Position.h"
 
-
+//Piece class is an abstract class used by all the pieces
+//this class contains methods for manipulating the piece and the array storing the layout of it
+//see boxPiece.h for explaination of innherited pieces
 class Piece 
 {
 public:

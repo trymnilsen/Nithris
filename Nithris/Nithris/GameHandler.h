@@ -15,37 +15,44 @@
 class GameHandler
 {
 public:
+	//standard meyers singleton pattern
 	static GameHandler& instance()
 	{
 		static GameHandler gh;
 		return gh;
 	}
+	//Initialize the game and core valeus
 	void initGame();
+	//start the gameloop, running all our logic
 	void runGame();
+	//clean up 
 	void cleanUpGame();
 private:
+	//private construction enabling us to only call it from within itself
 	GameHandler(){};
 	GameHandler(const GameHandler&);
 	GameHandler& operator=(const GameHandler&);
 	
+	//Vial gameplay methods
 	void GamePlayInput();
 	void MenuInput();
 	void renderPlayboard();
 	void renderScoreBoard();
 	void processPlayboard();
-	void startNewGame();
 	void movePiece(EMovement wantedMove);
 	ECollisionType checkCollision(std::shared_ptr<Piece> piece, EMovement wantedMove);
 
+	//smartpoints for core gameplay objects
 	std::unique_ptr<Render> gameRender;
 	std::unique_ptr<Piece> CurrentPiece;
 	std::unique_ptr<Round> CurrentRound;
+	//is the game over, or should we prompt the user?
 	bool gameOver;
-	bool finishedPlaying;
 	bool MenuActive;
 	EPromtType activeMenu;
+	//what does the user want to do?
 	EMovement RequestedDirection;
-
+	//Timers, enabling us to both put the program to sleep decreasing cpu usage and get accurate timing for gameplay elements
 	LoopTimer inputTimer;
 	LoopTimer updateTimer;
 	LoopTimer MovementTickTimer;

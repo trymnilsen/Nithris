@@ -1,9 +1,11 @@
+//PG4400 - INNLEVERING 1 - TRYM NILSEN
 #include <SDL.h>
 #include "GameHandler.h"
 #include <iostream>
 
 int main( int argc,char* argv[] ) 
 {
+	//try to initialize our game
 	try{
 		GameHandler::instance().initGame();
 	}
