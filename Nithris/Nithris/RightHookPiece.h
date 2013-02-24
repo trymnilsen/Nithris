@@ -10,6 +10,6 @@ class RightHookPiece : public Piece
 public:
 	RightHookPiece();
 	RightHookPiece(Piece& pieceClone):Piece(pieceClone){};
-	std::shared_ptr<Piece> CreateGhost(EMovement movement);
+	std::shared_ptr<Piece> createGhost(EMovement movement);
 };
 #endif

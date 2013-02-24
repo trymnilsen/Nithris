@@ -13,6 +13,6 @@ public:
 	//Creates a clone of a piece, this way we can easily create a new piece based on anotherone for example the ghostpiece
 	BoxPiece(Piece& pieceClone):Piece(pieceClone){};
 	//creates a ghost that is equal to this exact class..
-	std::shared_ptr<Piece> CreateGhost(EMovement movement);
+	std::shared_ptr<Piece> createGhost(EMovement movement);
 };
 #endif // !BOXPIECE_H

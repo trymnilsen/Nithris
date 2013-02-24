@@ -10,6 +10,6 @@ class TPiece : public Piece
 public:
 	TPiece();
 	TPiece(Piece& pieceClone):Piece(pieceClone){};
-	std::shared_ptr<Piece> CreateGhost(EMovement movement);
+	std::shared_ptr<Piece> createGhost(EMovement movement);
 };
 #endif TPIECE_H

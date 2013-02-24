@@ -27,7 +27,7 @@ public:
 	//render the scoreBoard
 	void renderScoreBoard(Piece& nextPiece, int currentScore, int highScore);
 	//draw a piece at the position !NOTE:! position is in a 32x32 grid not pixels
-	void DrawPiece(Piece& pieceToDraw, Position *position);
+	void drawPiece(Piece& pieceToDraw, Position *position);
 	//draw the promt menus
 	void promtUser(EPromtType& type);
 	//Realize this might not be the perfect name, but presents the render buffer 
@@ -35,20 +35,20 @@ public:
 
 private:
 	//Draws a tile
-	void DrawTile(ETileColor& color,Position *position);
+	void drawTile(ETileColor& color,Position *position);
 	//Draws a number taken from example wrapper class
-	void DrawNumber(unsigned short number,Position *position);
+	void drawNumber(unsigned short number,Position *position);
 	//Draws the promt menues
-	void DrawWelcomeMessage();
-	void DrawPauseMessage();
-	void DrawGameOverMessage();
+	void drawWelcomeMessage();
+	void drawPauseMessage();
+	void drawGameOverMessage();
 	//Draws the scoreboardBackground
-	void DrawScoreboardBG();
+	void drawScoreboardBG();
 	//draws a single digit
-	void DrawScoreDigit(short sPosX, short sPosY, unsigned short usDigit);
+	void drawScoreDigit(short sPosX, short sPosY, unsigned short usDigit);
 
 	//Method for loading a BMP file and retunrns a shared pointer to it
-	std::shared_ptr<SDL_Texture> LoadBmpFile(const char* filename);
+	std::shared_ptr<SDL_Texture> loadBmpFile(const char* filename);
 	//Points to out windows and renderers
 	SDL_Window *gameWindowPointer;
 	SDL_Renderer *windowRenderPointer;

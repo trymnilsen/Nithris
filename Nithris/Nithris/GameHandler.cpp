@@ -9,7 +9,7 @@ void GameHandler::initGame()
 	//Initialize our first round
 	CurrentRound = std::unique_ptr<Round>(new Round());
 	//Set up core gameplayvalues
-	RequestedDirection=EDIR_NOCHANGE;
+	requestedDirection=EDIR_NOCHANGE;
 	activeMenu=PROMT_NEWGAME;
 	MenuActive=true;
 	gameOver=false;
@@ -35,7 +35,7 @@ void GameHandler::runGame()
 		{
 			movePiece(EDIR_DROP);
 			//reset requested direction
-			RequestedDirection=EDIR_NOCHANGE;
+			requestedDirection=EDIR_NOCHANGE;
 			//Process the playboard(check for complete lines)
 			processPlayboard();
 		}
@@ -45,13 +45,13 @@ void GameHandler::runGame()
 			//if the menu is not active move the piece and reset the requested direction
 			if(!MenuActive)
 			{
-				movePiece(RequestedDirection);
-				RequestedDirection=EDIR_NOCHANGE;
+				movePiece(requestedDirection);
+				requestedDirection=EDIR_NOCHANGE;
 			}
 			//Render the elements
 			renderPlayboard();
 			renderScoreBoard();
-			gameRender->DrawPiece(*CurrentRound->getCurrentPiece().get(),&CurrentRound->getCurrentPiece()->piecePosition);
+			gameRender->drawPiece(*CurrentRound->getCurrentPiece().get(),&CurrentRound->getCurrentPiece()->piecePosition);
 			//Show the menu
 			if(MenuActive)
 			{
@@ -69,7 +69,7 @@ void GameHandler::runGame()
 			/*Process gameplay input, the reason why why check the input and save the desired action is that the
 			threshold for pressing the key excatly on the update is lower, but we want to keep the actual moving of the element
 			much slower than the fetching of the input*/
-			GamePlayInput();
+			gamePlayInput();
 			//check if game over (piece at the upper rows)
 			if(CurrentRound->getPlayboard()->checkGameOver())
 			{
@@ -80,7 +80,7 @@ void GameHandler::runGame()
 		else
 		{
 			//Handle menu input
-			MenuInput();
+			menuInput();
 		}
 		//check if window X has been pressed independantly if a menu promt is open or not
 		if(InputManagerSDL::Instance().userExit())
@@ -136,7 +136,7 @@ void GameHandler::movePiece(EMovement wantedMove)
 	if(wantedMove!=EDIR_NOCHANGE)
 	{
 		//create a ghost at the new position/and or orientation and check for collision on it
-		std::shared_ptr<Piece> ghost = CurrentRound->getCurrentPiece()->CreateGhost(wantedMove);
+		std::shared_ptr<Piece> ghost = CurrentRound->getCurrentPiece()->createGhost(wantedMove);
 		ECollisionType collisionType = checkCollision(ghost,wantedMove);
 		if(!collisionType)
 		{
@@ -173,13 +173,13 @@ ECollisionType GameHandler::checkCollision(std::shared_ptr<Piece> piece, EMoveme
 			if(piece->tileAt(x,y))
 			{
 				//if outside the playarea
-				if(piece->piecePosition.X+x<0 || piece->piecePosition.X+x>playboardTilesWidth-1)
+				if(piece->piecePosition.X+x<0 || piece->piecePosition.X+x>PlayboardTilesWidth-1)
 				{
 					return ECT_WALL;
 				}
 				//We split this into several ifs making it easier to read, eventough the return the same value
 				//if we hit the bottom
-				else if(piece->piecePosition.Y+y>playboardTilesHeight-1)
+				else if(piece->piecePosition.Y+y>PlayboardTilesHeight-1)
 				{
 					return ECT_BRICK;
 				}
@@ -203,25 +203,25 @@ ECollisionType GameHandler::checkCollision(std::shared_ptr<Piece> piece, EMoveme
 }
 
 //Split gameinput into to methods making it a little easier to read raither than one big input part directly in the gameloop
-void GameHandler::GamePlayInput()
+void GameHandler::gamePlayInput()
 {
 	if (InputManagerSDL::Instance().KeyDown(SDL_SCANCODE_LEFT))
 	{
-		RequestedDirection=EDIR_LEFT;
+		requestedDirection=EDIR_LEFT;
 	}
 
 	else if (InputManagerSDL::Instance().KeyDown(SDL_SCANCODE_RIGHT))
 	{
-		RequestedDirection=EDIR_RIGHT;
+		requestedDirection=EDIR_RIGHT;
 	}
 	else if(InputManagerSDL::Instance().KeyDown(SDL_SCANCODE_SPACE))
 	{
-		RequestedDirection=EDIR_ROTATE;		
+		requestedDirection=EDIR_ROTATE;		
 	}
 	//If the down button pressed, speed up the time effectivly dropping the piece
 	else if(InputManagerSDL::Instance().KeyDown(SDL_SCANCODE_DOWN))
 	{
-		MovementTickTimer.SetUpdatesPerInterval(CurrentRound->dropSpeed*dropSpeedUp);
+		MovementTickTimer.SetUpdatesPerInterval(CurrentRound->dropSpeed*DropSpeedUp);
 		MovementTickTimer.Start();
 	}
 	else if(InputManagerSDL::Instance().KeyDown(SDL_SCANCODE_ESCAPE))
@@ -231,7 +231,7 @@ void GameHandler::GamePlayInput()
 	}
 }
 
-void GameHandler::MenuInput()
+void GameHandler::menuInput()
 {
 	//switch the different menu promts
 	//check for input on them as they are different

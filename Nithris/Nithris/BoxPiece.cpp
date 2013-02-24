@@ -13,12 +13,12 @@ BoxPiece::BoxPiece()
 	PieceColor=TC_BLUE;
 }
 
-std::shared_ptr<Piece> BoxPiece::CreateGhost(EMovement movement)
+std::shared_ptr<Piece> BoxPiece::createGhost(EMovement movement)
 {
 	//creates an instance of this, giving us the correct array and does a call to the baseclass
 	//decreasing the amount of code we need in each piecefile
 	std::shared_ptr<Piece> ghost = std::shared_ptr<Piece>(new BoxPiece(*this));
-	Piece::Transform(ghost,movement);
+	Piece::transform(ghost,movement);
 	return ghost;
 }
 

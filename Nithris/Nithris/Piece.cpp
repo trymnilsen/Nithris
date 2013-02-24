@@ -50,7 +50,7 @@ void Piece::rotate()
 	pieceObject=newOrientation;
 }
 
-void Piece::Transform(std::shared_ptr<Piece> transformTarget,EMovement movement )
+void Piece::transform(std::shared_ptr<Piece> transformTarget,EMovement movement )
 {
 	//Chooses what to do with the piece based on the movement enum 
 	switch (movement)

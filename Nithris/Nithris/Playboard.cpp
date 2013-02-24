@@ -29,11 +29,11 @@ short Playboard::checkBoard()
 {
 	short linesRemoved=0;
 	//look through the lines 
-	for(short y=0; y<playboardTilesHeight; ++y)
+	for(short y=0; y<PlayboardTilesHeight; ++y)
 	{
 		bool fullLine=false;
 		//for each new line reset the full line
-		for(short x=0; x<playboardTilesWidth; ++x)
+		for(short x=0; x<PlayboardTilesWidth; ++x)
 		{
 			if(boardArray[x][y]>0)
 			{
@@ -61,9 +61,9 @@ short Playboard::checkBoard()
 //initilialize our board will all background
 void Playboard::initalizeBoard()
 {
-	for(int y=0; y<playboardTilesHeight; y++)
+	for(int y=0; y<PlayboardTilesHeight; y++)
 	{
-		for (int x=0; x<playboardTilesWidth; x++)
+		for (int x=0; x<PlayboardTilesWidth; x++)
 		{
 			boardArray[x][y]=TC_BACKGROUND;
 		}
@@ -74,7 +74,7 @@ void Playboard::moveBricksdown(short lineToRemove)
 {
 	for(short y=lineToRemove; y>0; --y)
 	{
-		for(short x=0; x<playboardTilesWidth; ++x)
+		for(short x=0; x<PlayboardTilesWidth; ++x)
 		{
 			boardArray[x][y]=boardArray[x][y-1];
 		}
@@ -84,7 +84,7 @@ void Playboard::moveBricksdown(short lineToRemove)
 bool Playboard::checkGameOver()
 {
 	bool gameover=false;
-	for(short x=0; x<playboardTilesWidth; x++)
+	for(short x=0; x<PlayboardTilesWidth; x++)
 	{
 		if(boardArray[x][0]>0)
 		{

@@ -12,9 +12,9 @@ PolePiece::PolePiece()
 	PieceColor=TC_RED;
 }
 
-std::shared_ptr<Piece> PolePiece::CreateGhost(EMovement movement)
+std::shared_ptr<Piece> PolePiece::createGhost(EMovement movement)
 {
 	std::shared_ptr<Piece> ghost = std::shared_ptr<Piece>(new PolePiece(*this));
-	Piece::Transform(ghost,movement);
+	Piece::transform(ghost,movement);
 	return ghost;
 }

@@ -28,7 +28,7 @@ public:
 		return gh;
 	}
 	//genereates and returns a shared_ptr to the random piece
-	std::shared_ptr<Piece> GenerateRandomPiece();
+	std::shared_ptr<Piece> generateRandomPiece();
 private:
 	PieceFactory(){};
 	PieceFactory(const PieceFactory&);

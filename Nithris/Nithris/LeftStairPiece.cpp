@@ -12,9 +12,9 @@ LeftStairPiece::LeftStairPiece()
 	PieceColor=TC_CYAN;
 }
 
-std::shared_ptr<Piece> LeftStairPiece::CreateGhost(EMovement movement)
+std::shared_ptr<Piece> LeftStairPiece::createGhost(EMovement movement)
 {
 	std::shared_ptr<Piece> ghost = std::shared_ptr<Piece>(new LeftStairPiece(*this));
-	Piece::Transform(ghost,movement);
+	Piece::transform(ghost,movement);
 	return ghost;
 }

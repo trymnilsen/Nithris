@@ -12,9 +12,9 @@ RightHookPiece::RightHookPiece()
 	PieceColor=TC_YELLOW;
 }
 
-std::shared_ptr<Piece> RightHookPiece::CreateGhost(EMovement movement)
+std::shared_ptr<Piece> RightHookPiece::createGhost(EMovement movement)
 {
 	std::shared_ptr<Piece> ghost = std::shared_ptr<Piece>(new RightHookPiece(*this));
-	Piece::Transform(ghost,movement);
+	Piece::transform(ghost,movement);
 	return ghost;
 }

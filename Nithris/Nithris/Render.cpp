@@ -33,12 +33,12 @@ void Render::renderInit()
 	//Set render color
 	SDL_SetRenderDrawColor(windowRenderPointer,0,0,255,255);
 	//loading our textures
-	brickTexture=LoadBmpFile("Assets/tiles_32x32.bmp");
-	scoreBoardTexture=LoadBmpFile("Assets/scoreboard_back.bmp");
-	numbersTexture=LoadBmpFile("Assets/numbers_32x32.bmp");
-	welcomeTexture=LoadBmpFile("Assets/startup.bmp");
-	pauseTexture=LoadBmpFile("Assets/pause.bmp");
-	gameOverTexture=LoadBmpFile("Assets/gameover.bmp");
+	brickTexture=loadBmpFile("Assets/tiles_32x32.bmp");
+	scoreBoardTexture=loadBmpFile("Assets/scoreboard_back.bmp");
+	numbersTexture=loadBmpFile("Assets/numbers_32x32.bmp");
+	welcomeTexture=loadBmpFile("Assets/startup.bmp");
+	pauseTexture=loadBmpFile("Assets/pause.bmp");
+	gameOverTexture=loadBmpFile("Assets/gameover.bmp");
 
 
 }
@@ -46,16 +46,16 @@ void Render::renderInit()
 void Render::renderPlayBoard(std::shared_ptr<Playboard> boardToBeRendered)
 {
 	//Loop through it and draw the appropriate color
-	for(int y=0; y<playboardTilesHeight; y++)
+	for(int y=0; y<PlayboardTilesHeight; y++)
 	{
-		for(int x=0; x<playboardTilesWidth; x++)
+		for(int x=0; x<PlayboardTilesWidth; x++)
 		{
 			//find the color and draw it
 			ETileColor tileColor = boardToBeRendered->colorOfTileAt(x,y);
 			Position TilePos;
 			TilePos.X=x;
 			TilePos.Y=y;
-			DrawTile(tileColor,&TilePos);
+			drawTile(tileColor,&TilePos);
 		}
 	}
 }
@@ -72,10 +72,10 @@ void Render::renderScoreBoard(Piece& nextPiece, int currentScore, int highScore 
 	Position highscorePos;
 	highscorePos.X=PlayboardPixelsWidth+40;
 	highscorePos.Y=430;
-	DrawScoreboardBG();
-	DrawPiece(nextPiece,&nextPiecePos);
-	DrawNumber(currentScore,&scorePos);
-	DrawNumber(highScore,&highscorePos);
+	drawScoreboardBG();
+	drawPiece(nextPiece,&nextPiecePos);
+	drawNumber(currentScore,&scorePos);
+	drawNumber(highScore,&highscorePos);
 }
 void Render::promtUser(EPromtType& type)
 {
@@ -83,13 +83,13 @@ void Render::promtUser(EPromtType& type)
 	switch (type)
 	{
 	case PROMT_NEWGAME:
-		DrawWelcomeMessage();
+		drawWelcomeMessage();
 		break;
 	case PROMT_GAMEOVER:
-		DrawGameOverMessage();
+		drawGameOverMessage();
 		break;
 	case PROMT_PAUSE:
-		DrawPauseMessage();
+		drawPauseMessage();
 		break;
 	default:
 		break;
@@ -102,7 +102,7 @@ void Render::flipBuffers()
 }
 
 ///PROMT MESSAGES
-void Render::DrawWelcomeMessage()
+void Render::drawWelcomeMessage()
 {
 	//gets the desination and draw the texture
 	SDL_Rect tileDestinationRect;
@@ -115,7 +115,7 @@ void Render::DrawWelcomeMessage()
 	SDL_RenderCopy(windowRenderPointer,welcomeTexture.get(),NULL,&tileDestinationRect);
 }
 
-void Render::DrawPauseMessage()
+void Render::drawPauseMessage()
 {
 	//gets the desination and draw the texture
 	SDL_Rect tileDestinationRect;
@@ -128,7 +128,7 @@ void Render::DrawPauseMessage()
 	SDL_RenderCopy(windowRenderPointer,pauseTexture.get(),NULL,&tileDestinationRect);
 }
 
-void Render::DrawGameOverMessage()
+void Render::drawGameOverMessage()
 {
 	//gets the desination and draw the texture
 	SDL_Rect tileDestinationRect;
@@ -141,7 +141,7 @@ void Render::DrawGameOverMessage()
 	SDL_RenderCopy(windowRenderPointer,gameOverTexture.get(),NULL,&tileDestinationRect);
 }
 
-void Render::DrawPiece(Piece& pieceToDraw, Position *position)
+void Render::drawPiece(Piece& pieceToDraw, Position *position)
 {
 	//draws a piece by itterating through its array and if the tile is marked it is drawn
 	for(int y=0; y<4; y++)
@@ -153,13 +153,13 @@ void Render::DrawPiece(Piece& pieceToDraw, Position *position)
 				Position tilePosition;
 				tilePosition.X=position->X+x;
 				tilePosition.Y=position->Y+y;
-				DrawTile(pieceToDraw.PieceColor,&tilePosition);
+				drawTile(pieceToDraw.PieceColor,&tilePosition);
 			}
 		}
 	}
 }
 
-void Render::DrawNumber(unsigned short number, Position *position )
+void Render::drawNumber(unsigned short number, Position *position )
 {
 	//Taken from assignment example
 	// Render the scoretext output.
@@ -169,30 +169,30 @@ void Render::DrawNumber(unsigned short number, Position *position )
 	{
 		finalDigit = tempScore % 10;
 		tempScore /= 10;
-		DrawScoreDigit(position->X + (3 - usDigitSpot)*tileSize, position->Y, finalDigit);
+		drawScoreDigit(position->X + (3 - usDigitSpot)*TileSize, position->Y, finalDigit);
 	}
 }
 
-void Render::DrawTile(ETileColor& color,Position *position)
+void Render::drawTile(ETileColor& color,Position *position)
 {
 	///Draws the tile at the specified position with the specified color
 	SDL_Rect tileSourceRect;
 	SDL_Rect tileDestinationRect;
-	tileSourceRect.x=color*tileSize;
+	tileSourceRect.x=color*TileSize;
 	tileSourceRect.y=0;
-	tileSourceRect.w=tileSize;
-	tileSourceRect.h=tileSize;
+	tileSourceRect.w=TileSize;
+	tileSourceRect.h=TileSize;
 
-	tileDestinationRect.x=position->X*tileSize;
-	tileDestinationRect.y=position->Y*tileSize;
-	tileDestinationRect.w=tileSize;
-	tileDestinationRect.h=tileSize;
+	tileDestinationRect.x=position->X*TileSize;
+	tileDestinationRect.y=position->Y*TileSize;
+	tileDestinationRect.w=TileSize;
+	tileDestinationRect.h=TileSize;
 
 	SDL_RenderCopy(windowRenderPointer,brickTexture.get(),&tileSourceRect,&tileDestinationRect);
 }
 
 //Loads a bmp file
-std::shared_ptr<SDL_Texture>  Render::LoadBmpFile( const char* filename )
+std::shared_ptr<SDL_Texture>  Render::loadBmpFile( const char* filename )
 {
 	try{
 	SDL_Surface *loadedFile=SDL_LoadBMP(filename);
@@ -211,7 +211,7 @@ std::shared_ptr<SDL_Texture>  Render::LoadBmpFile( const char* filename )
 	return NULL;
 }
 
-void Render::DrawScoreboardBG()
+void Render::drawScoreboardBG()
 {
 	//gets the position to draw the scoreboard background
 	SDL_Rect destinationRect;
@@ -221,7 +221,7 @@ void Render::DrawScoreboardBG()
 	destinationRect.h=ScoreBoardHeight;
 	SDL_RenderCopy(windowRenderPointer,scoreBoardTexture.get(),NULL,&destinationRect);
 }
-void Render::DrawScoreDigit(short sPosX, short sPosY, unsigned short usDigit) 
+void Render::drawScoreDigit(short sPosX, short sPosY, unsigned short usDigit) 
 {
 	//take from assignment example
 	SDL_Rect oScreenRect;  // Part of screen we want to draw to.
@@ -229,13 +229,13 @@ void Render::DrawScoreDigit(short sPosX, short sPosY, unsigned short usDigit)
 
 	oScreenRect.x = sPosX; 
 	oScreenRect.y = sPosY;
-	oScreenRect.w = tileSize;
-	oScreenRect.h = tileSize;
+	oScreenRect.w = TileSize;
+	oScreenRect.h = TileSize;
 
-	oNumberRect.x = usDigit * tileSize;   
+	oNumberRect.x = usDigit * TileSize;   
 	oNumberRect.y = 0;
-	oNumberRect.w = tileSize;   
-	oNumberRect.h = tileSize;
+	oNumberRect.w = TileSize;   
+	oNumberRect.h = TileSize;
 
 	// When positions are set, the wanted tile to the screen.
 	SDL_RenderCopy(windowRenderPointer, numbersTexture.get(), &oNumberRect, &oScreenRect);

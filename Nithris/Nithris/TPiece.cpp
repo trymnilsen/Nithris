@@ -12,9 +12,9 @@ TPiece::TPiece()
 	PieceColor=TC_YELLOW;
 }
 
-std::shared_ptr<Piece> TPiece::CreateGhost(EMovement movement)
+std::shared_ptr<Piece> TPiece::createGhost(EMovement movement)
 {
 	std::shared_ptr<Piece> ghost = std::shared_ptr<Piece>(new TPiece(*this));
-	Piece::Transform(ghost,movement);
+	Piece::transform(ghost,movement);
 	return ghost;
 }

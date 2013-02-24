@@ -24,7 +24,7 @@ public:
 private:
 	//Initialize board
 	void initalizeBoard();
-	std::array<std::array<ETileColor,playboardTilesHeight>,playboardTilesWidth> boardArray;
+	std::array<std::array<ETileColor,PlayboardTilesHeight>,PlayboardTilesWidth> boardArray;
 };
 
 #endif

@@ -21,9 +21,9 @@ public:
 	void dropOne();
 	void dropDown(char NumberOfTiles);
 	void rotate();
-	void Transform(std::shared_ptr<Piece> transformTarget,EMovement movement);
+	void transform(std::shared_ptr<Piece> transformTarget,EMovement movement);
 	const std::array<std::array<bool,4>,4> getPieceArray() {return pieceObject;}
-	virtual std::shared_ptr<Piece> CreateGhost(EMovement movement) = 0;
+	virtual std::shared_ptr<Piece> createGhost(EMovement movement) = 0;
 	Position piecePosition;
 	ETileColor PieceColor;
 

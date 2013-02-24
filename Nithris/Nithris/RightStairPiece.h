@@ -10,7 +10,7 @@ class RightStairPiece : public Piece
 public:
 	RightStairPiece();
 	RightStairPiece(Piece& pieceClone):Piece(pieceClone){};
-	std::shared_ptr<Piece> CreateGhost(EMovement movement);
+	std::shared_ptr<Piece> createGhost(EMovement movement);
 };
 
 #endif

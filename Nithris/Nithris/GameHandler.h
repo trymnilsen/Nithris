@@ -34,8 +34,8 @@ private:
 	GameHandler& operator=(const GameHandler&);
 	
 	//Vial gameplay methods
-	void GamePlayInput();
-	void MenuInput();
+	void gamePlayInput();
+	void menuInput();
 	void renderPlayboard();
 	void renderScoreBoard();
 	void processPlayboard();
@@ -52,7 +52,7 @@ private:
 	int highScore;
 	EPromtType activeMenu;
 	//what does the user want to do?
-	EMovement RequestedDirection;
+	EMovement requestedDirection;
 	//Timers, enabling us to both put the program to sleep decreasing cpu usage and get accurate timing for gameplay elements
 	LoopTimer inputTimer;
 	LoopTimer updateTimer;

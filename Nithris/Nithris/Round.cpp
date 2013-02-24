@@ -6,15 +6,15 @@
 Round::Round()
 {
 	gamePlayboard.swap(std::shared_ptr<Playboard>(new Playboard()));
-	nextPiece=PieceFactory::instance().GenerateRandomPiece();
-	CurrentPiece=PieceFactory::instance().GenerateRandomPiece();
+	nextPiece=PieceFactory::instance().generateRandomPiece();
+	CurrentPiece=PieceFactory::instance().generateRandomPiece();
 	score=0;
 	dropSpeed=StartDropSpeed;
 }
 //asks the piecefactory for a new piece
 void Round::generateNextPiece()
 {
-	nextPiece=PieceFactory::instance().GenerateRandomPiece();
+	nextPiece=PieceFactory::instance().generateRandomPiece();
 }
 //returns the current piece
 std::shared_ptr<Piece> Round::getCurrentPiece()

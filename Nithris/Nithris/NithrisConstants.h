@@ -49,14 +49,14 @@ Here be dragons,
 dont change this stuff as wrong values WILL make the program crash
 
 */
-const int playboardTilesWidth = 10;
-const int playboardTilesHeight = 20;
-const int tileSize=32;
-const short PlayboardPixelsWidth = playboardTilesWidth*tileSize;
-const short PlayboardPixelsHeight = playboardTilesHeight*tileSize;
+const int PlayboardTilesWidth = 10;
+const int PlayboardTilesHeight = 20;
+const int TileSize=32;
+const short PlayboardPixelsWidth = PlayboardTilesWidth*TileSize;
+const short PlayboardPixelsHeight = PlayboardTilesHeight*TileSize;
 const short ScoreBoardWidth=256;
 const short ScoreBoardHeight=PlayboardPixelsHeight;
 const short StartDropSpeed=3;
-const short dropSpeedUp=15;
+const short DropSpeedUp=15;
 
 #endif // !NITHRISCONSTANTS_H
