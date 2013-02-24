@@ -12,7 +12,6 @@ class Piece
 public:
 	Piece();
 	Piece(Piece& pieceClone);
-	//virtual ~Piece();
 	bool tileAt(int x, int y);
 	void setTileAt(int x, int y);
 	void nudge(char tiles);

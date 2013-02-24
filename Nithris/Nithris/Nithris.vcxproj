@@ -90,6 +90,7 @@
     <ClCompile Include="PieceFactory.cpp" />
     <ClCompile Include="Playboard.cpp" />
     <ClCompile Include="PolePiece.cpp" />
+    <ClCompile Include="Position.cpp" />
     <ClCompile Include="Render.cpp" />
     <ClCompile Include="RightHookPiece.cpp" />
     <ClCompile Include="RightStairPiece.cpp" />
@@ -98,11 +99,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoxPiece.h" />
+    <ClInclude Include="FatalRuntimeEx.h" />
     <ClInclude Include="GameHandler.h" />
     <ClInclude Include="GraphicsInitEx.h" />
     <ClInclude Include="InputManagerSDL.h" />
     <ClInclude Include="LeftHookPiece.h" />
     <ClInclude Include="LeftStairPiece.h" />
+    <ClInclude Include="LogicRuntimeEx.h" />
     <ClInclude Include="LoopTimer.h" />
     <ClInclude Include="NithrisConstants.h" />
     <ClInclude Include="Piece.h" />
@@ -115,7 +118,6 @@
     <ClInclude Include="RightHookPiece.h" />
     <ClInclude Include="RightStairPiece.h" />
     <ClInclude Include="Round.h" />
-    <ClInclude Include="TileColor.h" />
     <ClInclude Include="TPiece.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

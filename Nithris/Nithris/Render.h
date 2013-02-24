@@ -25,7 +25,7 @@ public:
 	void DrawPiece(Piece& pieceToDraw, Position *position);
 	void promtUser(EPromtType& type);
 	void flipBuffers();
-	SDL_Renderer *getRenderer();
+
 private:
 	void DrawTile(ETileColor& color,Position *position);
 	void DrawNumber(unsigned short number,Position *position);

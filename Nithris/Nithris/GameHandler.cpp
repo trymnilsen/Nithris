@@ -15,7 +15,6 @@ void GameHandler::initGame()
 	MovementTickTimer.SetUpdatesPerInterval(StartDropSpeed);
 	
 }
-
 void GameHandler::runGame()
 {
 	//Timer for Checking for input
@@ -79,7 +78,9 @@ void GameHandler::runGame()
 
 void GameHandler::cleanUpGame()
 {
-
+	gameRender.release();
+	CurrentPiece.release();
+	CurrentRound.release();
 }
 
 void GameHandler::renderPlayboard()
@@ -126,7 +127,6 @@ void GameHandler::movePiece(EMovement wantedMove)
 		else if(collisionType==ECT_BRICK)
 		{
 			CurrentRound->getPlayboard()->setPieceAt(CurrentRound->getCurrentPiece()->piecePosition.X,CurrentRound->getCurrentPiece()->piecePosition.Y,*CurrentRound->getCurrentPiece().get());
-			CurrentRound->getCurrentPiece().reset();
 			CurrentRound->setCurrentPiece(CurrentRound->getNextPiece());
 			CurrentRound->generateNextPiece();
 			MovementTickTimer.SetUpdatesPerInterval(CurrentRound->dropSpeed);
@@ -226,7 +226,6 @@ void GameHandler::MenuInput()
 	case PROMT_GAMEOVER:
 		if(InputManagerSDL::Instance().KeyDown(SDL_SCANCODE_SPACE))
 		{
-			CurrentRound.release();
 			CurrentRound=std::unique_ptr<Round>(new Round());
 			MenuActive=false;
 		}
@@ -239,6 +238,8 @@ void GameHandler::MenuInput()
 		break;
 	}
 }
+
+
 
 
 

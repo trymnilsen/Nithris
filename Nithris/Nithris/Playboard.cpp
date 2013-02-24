@@ -4,6 +4,7 @@ Playboard::Playboard()
 {
 	initalizeBoard();
 }
+
 const ETileColor Playboard::colorOfTileAt(int collum, int row ) 
 {
 	const ETileColor returnColor = boardArray[collum][row];
@@ -89,6 +90,8 @@ bool Playboard::checkGameOver()
 	}
 	return gameover;
 }
+
+
 
 
 

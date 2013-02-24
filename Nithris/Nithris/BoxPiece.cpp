@@ -18,3 +18,4 @@ std::shared_ptr<Piece> BoxPiece::CreateGhost(EMovement movement)
 	return ghost;
 }
 
+

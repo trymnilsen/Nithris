@@ -7,9 +7,14 @@ Render::Render()
 
 Render::~Render()
 {
+	{
 	SDL_DestroyRenderer(windowRenderPointer);
 	SDL_DestroyWindow(gameWindowPointer);
+
+
+	}
 	SDL_Quit();
+
 }
 void Render::renderInit()
 {
@@ -101,10 +106,6 @@ void Render::promtUser(EPromtType& type)
 void Render::flipBuffers()
 {
 	SDL_RenderPresent(windowRenderPointer);
-}
-SDL_Renderer* Render::getRenderer()
-{
-	return windowRenderPointer;
 }
 
 void Render::DrawWelcomeMessage()
