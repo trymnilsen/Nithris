@@ -117,10 +117,10 @@ void GameHandler::renderScoreBoard()
 void GameHandler::processPlayboard()
 {
 	//process the playboard, adding score and and updating dropspeed
-	bool hasRowsBeenRemoved=CurrentRound->getPlayboard()->checkBoard();
-	if(hasRowsBeenRemoved)
+	short RowsBeenRemoved=CurrentRound->getPlayboard()->checkBoard();
+	if(RowsBeenRemoved)
 	{
-		CurrentRound->score+=10;
+		CurrentRound->score+=10*RowsBeenRemoved;
 		CurrentRound->dropSpeed+=.3;
 		MovementTickTimer.SetUpdatesPerInterval(CurrentRound->dropSpeed);
 		MovementTickTimer.Start();

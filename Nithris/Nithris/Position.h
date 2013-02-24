@@ -1,3 +1,4 @@
+//PG4400 - INNLEVERING 1 - TRYM NILSEN
 #ifndef POSITION_H
 #define POSITION_H
 class Position

@@ -1,7 +1,9 @@
+//PG4400 - INNLEVERING 1 - TRYM NILSEN
 #include "Piece.h"
 
 Piece::Piece()
 {
+	//Creating a position for the piece to start at
 	Position position;
 	position.X=3;
 	position.Y=0;
@@ -10,6 +12,7 @@ Piece::Piece()
 
 Piece::Piece(Piece& pieceClone)
 {
+	//constructor cloing, doing a deep copy of an object
 	piecePosition=pieceClone.piecePosition;
 	PieceColor=pieceClone.PieceColor;
 	pieceObject=pieceClone.getPieceArray();
@@ -27,6 +30,7 @@ void Piece::setTileAt(int x, int y )
 
 void Piece::rotate()
 {
+	//rotates the piece given the algorithm in the assignment
 	std::array<std::array<bool,4>,4> newOrientation  = {
 		0,0,0,0,
 		0,0,0,0,
@@ -48,6 +52,7 @@ void Piece::rotate()
 
 void Piece::Transform(std::shared_ptr<Piece> transformTarget,EMovement movement )
 {
+	//Chooses what to do with the piece based on the movement enum 
 	switch (movement)
 	{
 	case EDIR_LEFT:

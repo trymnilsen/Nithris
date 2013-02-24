@@ -1,3 +1,5 @@
+//PG4400 - INNLEVERING 1 - TRYM NILSEN
+//overloaded operators
 #include "Position.h"
 Position Position::operator+( Position otherPosition )
 {

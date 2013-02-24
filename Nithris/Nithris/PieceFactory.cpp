@@ -1,9 +1,9 @@
+//PG4400 - INNLEVERING 1 - TRYM NILSEN
 #include "PieceFactory.h"
 
 std::shared_ptr<Piece> PieceFactory::GenerateRandomPiece()
 {
-	
-
+	//generate random number between 0 and 6 giving us different pieces and return a shared pointers to it
 	std::random_device generator;
 	std::uniform_int_distribution<int> int_distributor(0,6);
 	int num = int_distributor(generator);

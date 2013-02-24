@@ -1,3 +1,4 @@
+//PG4400 - INNLEVERING 1 - TRYM NILSEN
 #include "LeftHookPiece.h"
 LeftHookPiece::LeftHookPiece()
 {

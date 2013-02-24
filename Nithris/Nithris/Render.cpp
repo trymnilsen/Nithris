@@ -1,9 +1,6 @@
+//PG4400 - INNLEVERING 1 - TRYM NILSEN
 #include "Render.h"
 
-Render::Render()
-{
-
-}
 
 Render::~Render()
 {
@@ -18,6 +15,7 @@ Render::~Render()
 }
 void Render::renderInit()
 {
+	//checks for render errors if so throw an exception
 	if(!SDL_WasInit(SDL_INIT_VIDEO))
 	{
 		if(0>SDL_Init(SDL_INIT_VIDEO))
@@ -25,7 +23,7 @@ void Render::renderInit()
 			throw GraphicsInitEx("Could not initialize SDL");
 		}
 	}
-
+	//create the window
 	gameWindowPointer=SDL_CreateWindow("Nithris",SDL_WINDOWPOS_UNDEFINED,SDL_WINDOWPOS_UNDEFINED,PlayboardPixelsWidth+ScoreBoardWidth,PlayboardPixelsHeight,SDL_WINDOW_SHOWN | SDL_WINDOW_OPENGL);
 	if(gameWindowPointer==NULL)
 		throw GraphicsInitEx("Failed creating window");
@@ -34,6 +32,7 @@ void Render::renderInit()
 		throw GraphicsInitEx("Failed creating renderer for window");
 	//Set render color
 	SDL_SetRenderDrawColor(windowRenderPointer,0,0,255,255);
+	//loading our textures
 	brickTexture=LoadBmpFile("Assets/tiles_32x32.bmp");
 	scoreBoardTexture=LoadBmpFile("Assets/scoreboard_back.bmp");
 	numbersTexture=LoadBmpFile("Assets/numbers_32x32.bmp");
@@ -43,17 +42,17 @@ void Render::renderInit()
 
 
 }
-
+//Renders the playboard
 void Render::renderPlayBoard(std::shared_ptr<Playboard> boardToBeRendered)
 {
-
+	//Loop through it and draw the appropriate color
 	for(int y=0; y<playboardTilesHeight; y++)
 	{
 		for(int x=0; x<playboardTilesWidth; x++)
 		{
 			SDL_Rect tileSourceRect;
 			SDL_Rect tileDestinationRect;
-			const ETileColor tileColor = boardToBeRendered->colorOfTileAt(x,y);
+			ETileColor tileColor = boardToBeRendered->colorOfTileAt(x,y);
 			tileSourceRect.x=tileColor*tileSize;
 			tileSourceRect.y=0;
 			tileSourceRect.w=tileSize;
@@ -65,9 +64,7 @@ void Render::renderPlayBoard(std::shared_ptr<Playboard> boardToBeRendered)
 			tileDestinationRect.h=tileSize;
 			SDL_RenderCopy(windowRenderPointer,brickTexture.get(),&tileSourceRect,&tileDestinationRect);
 		}
-
 	}
-	
 }
 
 void Render::renderScoreBoard(Piece& nextPiece, int currentScore, int highScore )

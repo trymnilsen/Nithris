@@ -113,7 +113,6 @@
     <ClInclude Include="Playboard.h" />
     <ClInclude Include="PolePiece.h" />
     <ClInclude Include="Position.h" />
-    <ClInclude Include="PromptType.h" />
     <ClInclude Include="Render.h" />
     <ClInclude Include="RightHookPiece.h" />
     <ClInclude Include="RightStairPiece.h" />
