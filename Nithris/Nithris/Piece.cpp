@@ -4,7 +4,7 @@ Piece::Piece()
 {
 	Position position;
 	position.X=3;
-	position.Y=1;
+	position.Y=0;
 	piecePosition=position;
 }
 

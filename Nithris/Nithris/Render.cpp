@@ -111,10 +111,10 @@ void Render::DrawWelcomeMessage()
 {
 	SDL_Rect tileDestinationRect;
 
-	tileDestinationRect.x=200;
-	tileDestinationRect.y=140;
-	tileDestinationRect.w=tileSize;
-	tileDestinationRect.h=tileSize;
+	tileDestinationRect.x=120;
+	tileDestinationRect.y=220;
+	tileDestinationRect.w=260;
+	tileDestinationRect.h=150;
 
 	SDL_RenderCopy(windowRenderPointer,welcomeTexture.get(),NULL,&tileDestinationRect);
 }
@@ -123,10 +123,10 @@ void Render::DrawPauseMessage()
 {
 	SDL_Rect tileDestinationRect;
 
-	tileDestinationRect.x=200;
-	tileDestinationRect.y=140;
-	tileDestinationRect.w=tileSize;
-	tileDestinationRect.h=tileSize;
+	tileDestinationRect.x=120;
+	tileDestinationRect.y=220;
+	tileDestinationRect.w=260;
+	tileDestinationRect.h=150;
 
 	SDL_RenderCopy(windowRenderPointer,pauseTexture.get(),NULL,&tileDestinationRect);
 }
@@ -135,10 +135,10 @@ void Render::DrawGameOverMessage()
 {
 	SDL_Rect tileDestinationRect;
 
-	tileDestinationRect.x=200;
-	tileDestinationRect.y=140;
-	tileDestinationRect.w=tileSize;
-	tileDestinationRect.h=tileSize;
+	tileDestinationRect.x=120;
+	tileDestinationRect.y=220;
+	tileDestinationRect.w=260;
+	tileDestinationRect.h=150;
 
 	SDL_RenderCopy(windowRenderPointer,gameOverTexture.get(),NULL,&tileDestinationRect);
 }

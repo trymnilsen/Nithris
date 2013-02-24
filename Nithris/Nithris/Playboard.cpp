@@ -72,6 +72,24 @@ void Playboard::moveBricksdown(short lineToRemove)
 	}
 }
 
+bool Playboard::checkGameOver()
+{
+	bool gameover=false;
+	for(short x=0; x<playboardTilesWidth; x++)
+	{
+		if(boardArray[x][0]>0)
+		{
+			gameover=true;
+			break;
+		}
+		else
+		{
+			gameover=false;
+		}
+	}
+	return gameover;
+}
+
 
 
 

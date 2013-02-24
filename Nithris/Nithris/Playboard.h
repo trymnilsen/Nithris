@@ -12,6 +12,7 @@ public:
 	const ETileColor colorOfTileAt(int collum, int row);
 	void setPieceAt(int collum,int row, Piece& piece);
 	bool checkBoard();
+	bool checkGameOver();
 	void moveBricksdown(short lineToRemove);
 private:
 	void initalizeBoard();

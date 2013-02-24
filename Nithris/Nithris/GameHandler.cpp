@@ -7,6 +7,8 @@ void GameHandler::initGame()
 	gameOver=false;
 	CurrentRound = std::unique_ptr<Round>(new Round());
 	RequestedDirection=EDIR_NOCHANGE;
+	activeMenu=PROMT_NEWGAME;
+	MenuActive=true;
 	//Timers
 	inputTimer.SetUpdatesPerInterval(1000);
 	updateTimer.SetUpdatesPerInterval(100);
@@ -38,38 +40,31 @@ void GameHandler::runGame()
 				movePiece(RequestedDirection);
 				RequestedDirection=EDIR_NOCHANGE;
 			}
-			else
-			{
-				gameRender->promtUser(activeMenu);
-			}
 			renderPlayboard();
 			renderScoreBoard();
 			gameRender->DrawPiece(*CurrentRound->getCurrentPiece().get(),&CurrentRound->getCurrentPiece()->piecePosition);
+			if(MenuActive)
+			{
+				gameRender->promtUser(activeMenu);
+			}
 			gameRender->flipBuffers();
 		}
 
 		InputManagerSDL::Instance().Update();
 		//Input
-		//Allows the user to exit
-
+		if(!MenuActive)
+		{
 		//
-		if (InputManagerSDL::Instance().KeyDown(SDL_SCANCODE_LEFT))
-		{
-			RequestedDirection=EDIR_LEFT;
+			GamePlayInput();
+			if(CurrentRound->getPlayboard()->checkGameOver())
+			{
+				activeMenu=PROMT_GAMEOVER;
+				MenuActive=true;
+			}
 		}
-
-		if (InputManagerSDL::Instance().KeyDown(SDL_SCANCODE_RIGHT))
+		else
 		{
-			RequestedDirection=EDIR_RIGHT;
-		}
-		if(InputManagerSDL::Instance().KeyDown(SDL_SCANCODE_SPACE))
-		{
-			RequestedDirection=EDIR_ROTATE;		
-		}
-		if(InputManagerSDL::Instance().KeyDown(SDL_SCANCODE_DOWN))
-		{
-			MovementTickTimer.SetUpdatesPerInterval(CurrentRound->dropSpeed*dropSpeedUp);
-			MovementTickTimer.Start();
+			MenuInput();
 		}
 		if(InputManagerSDL::Instance().userExit())
 		{
@@ -83,11 +78,6 @@ void GameHandler::runGame()
 }
 
 void GameHandler::cleanUpGame()
-{
-
-}
-
-void GameHandler::prompUser()
 {
 
 }
@@ -116,11 +106,6 @@ void GameHandler::processPlayboard()
 
 
 void GameHandler::startNewGame()
-{
-
-}
-
-void GameHandler::getNewPiece()
 {
 
 }
@@ -185,6 +170,74 @@ ECollisionType GameHandler::checkCollision(std::shared_ptr<Piece> piece, EMoveme
 		}
 	}
 	return ECT_NONE;
+}
+
+void GameHandler::GamePlayInput()
+{
+	if (InputManagerSDL::Instance().KeyDown(SDL_SCANCODE_LEFT))
+	{
+		RequestedDirection=EDIR_LEFT;
+	}
+
+	else if (InputManagerSDL::Instance().KeyDown(SDL_SCANCODE_RIGHT))
+	{
+		RequestedDirection=EDIR_RIGHT;
+	}
+	else if(InputManagerSDL::Instance().KeyDown(SDL_SCANCODE_SPACE))
+	{
+		RequestedDirection=EDIR_ROTATE;		
+	}
+	else if(InputManagerSDL::Instance().KeyDown(SDL_SCANCODE_DOWN))
+	{
+		MovementTickTimer.SetUpdatesPerInterval(CurrentRound->dropSpeed*dropSpeedUp);
+		MovementTickTimer.Start();
+	}
+	else if(InputManagerSDL::Instance().KeyDown(SDL_SCANCODE_ESCAPE))
+	{
+		MenuActive=true;
+		activeMenu=PROMT_PAUSE;
+	}
+}
+
+void GameHandler::MenuInput()
+{
+	switch (activeMenu)
+	{
+	case PROMT_NEWGAME:
+		if(InputManagerSDL::Instance().KeyDown(SDL_SCANCODE_SPACE))
+		{
+			MenuActive=false;
+		}
+		else if(InputManagerSDL::Instance().KeyDown(SDL_SCANCODE_ESCAPE))
+		{
+			gameOver=true;
+		}
+		break;
+	case PROMT_PAUSE:
+		if(InputManagerSDL::Instance().KeyDown(SDL_SCANCODE_Y))
+		{
+			activeMenu=PROMT_NEWGAME;
+		}
+		else if(InputManagerSDL::Instance().KeyDown(SDL_SCANCODE_N))
+		{
+			MenuActive=false;
+		}
+		break;
+	case PROMT_GAMEOVER:
+		if(InputManagerSDL::Instance().KeyDown(SDL_SCANCODE_SPACE))
+		{
+			CurrentRound.release();
+			CurrentRound=std::unique_ptr<Round>(new Round());
+			MenuActive=false;
+		}
+		else if(InputManagerSDL::Instance().KeyDown(SDL_SCANCODE_ESCAPE))
+		{
+			gameOver=true;
+		}
+		break;
+	default:
+		break;
+	}
 }
 
 

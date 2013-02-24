@@ -28,12 +28,12 @@ private:
 	GameHandler(const GameHandler&);
 	GameHandler& operator=(const GameHandler&);
 	
-	void prompUser();
+	void GamePlayInput();
+	void MenuInput();
 	void renderPlayboard();
 	void renderScoreBoard();
 	void processPlayboard();
 	void startNewGame();
-	void getNewPiece();
 	void movePiece(EMovement wantedMove);
 	ECollisionType checkCollision(std::shared_ptr<Piece> piece, EMovement wantedMove);
 
