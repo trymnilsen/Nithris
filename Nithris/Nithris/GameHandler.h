@@ -35,7 +35,7 @@ private:
 	void startNewGame();
 	void getNewPiece();
 	void movePiece(EMovement wantedMove);
-	ECollisionType checkCollision(std::shared_ptr<Piece> piece);
+	ECollisionType checkCollision(std::shared_ptr<Piece> piece, EMovement wantedMove);
 
 	std::unique_ptr<Render> gameRender;
 	std::unique_ptr<Piece> CurrentPiece;
@@ -43,6 +43,12 @@ private:
 	bool gameOver;
 	bool finishedPlaying;
 	EMovement RequestedDirection;
+
+	LoopTimer inputTimer;
+	LoopTimer updateTimer;
+	LoopTimer MovementTickTimer;
+
+
 };
 
 #endif

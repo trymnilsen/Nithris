@@ -7,11 +7,12 @@ Round::Round()
 	nextPiece=PieceFactory::instance().GenerateRandomPiece();
 	CurrentPiece=PieceFactory::instance().GenerateRandomPiece();
 	score=0;
+	dropSpeed=StartDropSpeed;
 }
 
 void Round::generateNextPiece()
 {
-	
+	nextPiece=PieceFactory::instance().GenerateRandomPiece();
 }
 
 std::shared_ptr<Piece> Round::getCurrentPiece()
@@ -24,9 +25,10 @@ std::shared_ptr<Playboard> Round::getPlayboard()
 	return gamePlayboard;
 }
 
-Piece& Round::getNextPiece()
+std::shared_ptr<Piece> Round::getNextPiece()
 {
-	return *nextPiece.get();
+	std::shared_ptr<Piece> returnPiece = nextPiece;
+	return returnPiece;
 }
 
 void Round::setCurrentPiece(std::shared_ptr<Piece> pieceToSet)

@@ -82,29 +82,41 @@
     <ClCompile Include="BoxPiece.cpp" />
     <ClCompile Include="GameHandler.cpp" />
     <ClCompile Include="InputManagerSDL.cpp" />
+    <ClCompile Include="LeftHookPiece.cpp" />
+    <ClCompile Include="LeftStairPiece.cpp" />
     <ClCompile Include="LoopTimer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Piece.cpp" />
     <ClCompile Include="PieceFactory.cpp" />
     <ClCompile Include="Playboard.cpp" />
+    <ClCompile Include="PolePiece.cpp" />
     <ClCompile Include="Render.cpp" />
+    <ClCompile Include="RightHookPiece.cpp" />
+    <ClCompile Include="RightStairPiece.cpp" />
     <ClCompile Include="Round.cpp" />
+    <ClCompile Include="TPiece.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoxPiece.h" />
     <ClInclude Include="GameHandler.h" />
     <ClInclude Include="GraphicsInitEx.h" />
     <ClInclude Include="InputManagerSDL.h" />
+    <ClInclude Include="LeftHookPiece.h" />
+    <ClInclude Include="LeftStairPiece.h" />
     <ClInclude Include="LoopTimer.h" />
     <ClInclude Include="NithrisConstants.h" />
     <ClInclude Include="Piece.h" />
     <ClInclude Include="PieceFactory.h" />
     <ClInclude Include="Playboard.h" />
+    <ClInclude Include="PolePiece.h" />
     <ClInclude Include="Position.h" />
     <ClInclude Include="PromptType.h" />
     <ClInclude Include="Render.h" />
+    <ClInclude Include="RightHookPiece.h" />
+    <ClInclude Include="RightStairPiece.h" />
     <ClInclude Include="Round.h" />
     <ClInclude Include="TileColor.h" />
+    <ClInclude Include="TPiece.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

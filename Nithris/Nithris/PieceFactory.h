@@ -7,6 +7,15 @@
 #include <SDL.h>
 
 #include "Piece.h"
+//pieces
+#include "BoxPiece.h"
+#include "PolePiece.h"
+#include "LeftStairPiece.h"
+#include "LeftHookPiece.h"
+#include "RightStairPiece.h"
+#include "RightHookPiece.h"
+#include "PolePiece.h"
+#include "TPiece.h"
 
 
 class PieceFactory
@@ -22,51 +31,5 @@ private:
 	PieceFactory(){};
 	PieceFactory(const PieceFactory&);
 	PieceFactory& operator=(const PieceFactory&);
-	
-	/*std::array<std::array<std::array<bool,4>,4>,7> pieces;
-	{{
-		{
-			{0,0,0,0}
-			{0,1,1,0}
-			{0,1,1,0}
-			{0,0,0,0}
-		}//,*/
-		/*{
-			0,0,0,0,
-			0,0,1,0,
-			0,1,1,0,
-			0,1,0,0
-		},
-		{
-			0,0,0,0,
-			0,1,0,0,
-			0,1,1,0,
-			0,0,1,0
-		},
-		{
-			0,0,0,0,
-			0,0,1,0,
-			0,1,1,0,
-			0,0,1,0
-		},
-		{
-			0,0,0,0,
-			0,0,0,0,
-			1,1,1,1,
-			0,0,0,0
-		},
-		{
-			0,0,0,0,
-			0,1,0,0,
-			0,1,1,1,
-			0,0,0,0
-		},
-		{
-			0,0,0,0,
-			0,1,1,1,
-			0,1,0,0,
-			0,0,0,0
-		}
-	}};*/
 };
 #endif // !PIECEFACTORY_H

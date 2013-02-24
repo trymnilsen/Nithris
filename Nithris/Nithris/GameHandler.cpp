@@ -2,28 +2,26 @@
 
 void GameHandler::initGame()
 {
-	gameRender.swap(std::unique_ptr<Render>(new Render()));
+	gameRender=std::unique_ptr<Render>(new Render());
 	gameRender->renderInit();
 	gameOver=false;
 	CurrentRound = std::unique_ptr<Round>(new Round());
 	RequestedDirection=EDIR_NOCHANGE;
+	//Timers
+	inputTimer.SetUpdatesPerInterval(1000);
+	updateTimer.SetUpdatesPerInterval(100);
+	MovementTickTimer.SetUpdatesPerInterval(StartDropSpeed);
+	
 }
 
 void GameHandler::runGame()
 {
 	//Timer for Checking for input
-	LoopTimer inputTimer(1000);
-	//Timer for rendering, no need for more than 60fps
-	LoopTimer renderTimer(60);
-	//Timer for moving the block down a notch
-	LoopTimer MovementTickTimer(3);
 	//Timer for modifing the brick, move it left/right or rotate it. (we save the requested action in each input update but only process it here.. did this to give the game a more old feel with a little fake lag)
-	LoopTimer BrickOperations(10);
 
 	inputTimer.Start();
-	renderTimer.Start();
+	updateTimer.Start();
 	MovementTickTimer.Start();
-
 	while(!gameOver)
 	{
 		if(MovementTickTimer.IsTimeForUpdate())
@@ -32,20 +30,22 @@ void GameHandler::runGame()
 			RequestedDirection=EDIR_NOCHANGE;
 			processPlayboard();
 		}
-		if(renderTimer.IsTimeForUpdate())
+		if(updateTimer.IsTimeForUpdate())
 		{
+			movePiece(RequestedDirection);
+			RequestedDirection=EDIR_NOCHANGE;
+
 			renderPlayboard();
 			renderScoreBoard();
 			gameRender->DrawPiece(*CurrentRound->getCurrentPiece().get(),&CurrentRound->getCurrentPiece()->piecePosition);
 			gameRender->flipBuffers();
 		}
-		if(BrickOperations.IsTimeForUpdate())
-		{
-			movePiece(RequestedDirection);
-			RequestedDirection=EDIR_NOCHANGE;
-		}
+
 		InputManagerSDL::Instance().Update();
 		//Input
+		//Allows the user to exit
+
+		//
 		if (InputManagerSDL::Instance().KeyDown(SDL_SCANCODE_LEFT))
 		{
 			RequestedDirection=EDIR_LEFT;
@@ -58,6 +58,15 @@ void GameHandler::runGame()
 		if(InputManagerSDL::Instance().KeyDown(SDL_SCANCODE_SPACE))
 		{
 			RequestedDirection=EDIR_ROTATE;		
+		}
+		if(InputManagerSDL::Instance().KeyDown(SDL_SCANCODE_DOWN))
+		{
+			MovementTickTimer.SetUpdatesPerInterval(CurrentRound->dropSpeed*dropSpeedUp);
+			MovementTickTimer.Start();
+		}
+		if(InputManagerSDL::Instance().userExit())
+		{
+			gameOver=true;
 		}
 
 		//
@@ -83,7 +92,7 @@ void GameHandler::renderPlayboard()
 
 void GameHandler::renderScoreBoard()
 {
-	gameRender->renderScoreBoard(CurrentRound->getNextPiece(),CurrentRound->score,50);
+	gameRender->renderScoreBoard(*CurrentRound->getNextPiece().get(),CurrentRound->score,50);
 }
 
 void GameHandler::processPlayboard()
@@ -91,7 +100,10 @@ void GameHandler::processPlayboard()
 	bool hasRowsBeenRemoved=CurrentRound->getPlayboard()->checkBoard();
 	if(hasRowsBeenRemoved)
 	{
-		CurrentRound->score+=100;
+		CurrentRound->score+=10;
+		CurrentRound->dropSpeed+=.3;
+		MovementTickTimer.SetUpdatesPerInterval(CurrentRound->dropSpeed);
+		MovementTickTimer.Start();
 	}
 }
 
@@ -111,7 +123,7 @@ void GameHandler::movePiece(EMovement wantedMove)
 	if(wantedMove!=EDIR_NOCHANGE)
 	{
 		std::shared_ptr<Piece> ghost = CurrentRound->getCurrentPiece()->CreateGhost(wantedMove);
-		ECollisionType collisionType = checkCollision(ghost);
+		ECollisionType collisionType = checkCollision(ghost,wantedMove);
 		if(!collisionType)
 		{
 				std::cout<<"moving orignal piece:"<<CurrentRound->getCurrentPiece()->piecePosition.Y<<std::endl<<"ghost"<<ghost->piecePosition.Y<<::std::endl;
@@ -122,8 +134,11 @@ void GameHandler::movePiece(EMovement wantedMove)
 		else if(collisionType==ECT_BRICK)
 		{
 			CurrentRound->getPlayboard()->setPieceAt(CurrentRound->getCurrentPiece()->piecePosition.X,CurrentRound->getCurrentPiece()->piecePosition.Y,*CurrentRound->getCurrentPiece().get());
-			CurrentRound->getCurrentPiece()->piecePosition.Y=1;
-			CurrentRound->getCurrentPiece()->piecePosition.X=4;
+			CurrentRound->getCurrentPiece().reset();
+			CurrentRound->setCurrentPiece(CurrentRound->getNextPiece());
+			CurrentRound->generateNextPiece();
+			MovementTickTimer.SetUpdatesPerInterval(CurrentRound->dropSpeed);
+			MovementTickTimer.Start();
 		}
 
 
@@ -131,7 +146,7 @@ void GameHandler::movePiece(EMovement wantedMove)
 }
 
 
-ECollisionType GameHandler::checkCollision(std::shared_ptr<Piece> piece)
+ECollisionType GameHandler::checkCollision(std::shared_ptr<Piece> piece, EMovement wantedMove)
 {
 	for (int y=0; y<4; y++)
 	{
@@ -144,11 +159,19 @@ ECollisionType GameHandler::checkCollision(std::shared_ptr<Piece> piece)
 				{
 					return ECT_WALL;
 				}
-				else if(piece->piecePosition.Y+y>playboardTilesHeight-1 || CurrentRound->getPlayboard()->colorOfTileAt(piece->piecePosition.X+x,piece->piecePosition.Y+y)>0)
+				//We split this into several ifs making it easier to read, eventough the return the same value
+				else if(piece->piecePosition.Y+y>playboardTilesHeight-1)
 				{
 					return ECT_BRICK;
 				}
-
+				else if(CurrentRound->getPlayboard()->colorOfTileAt(piece->piecePosition.X+x,piece->piecePosition.Y+y)>0 && wantedMove==EDIR_DROP)
+				{
+					return ECT_BRICK;
+				}
+				else if(CurrentRound->getPlayboard()->colorOfTileAt(piece->piecePosition.X+x,piece->piecePosition.Y+y)>0 && (wantedMove==EDIR_LEFT || wantedMove==EDIR_RIGHT || wantedMove==EDIR_ROTATE))
+				{
+					return ECT_WALL;
+				}
 				
 			}
 			

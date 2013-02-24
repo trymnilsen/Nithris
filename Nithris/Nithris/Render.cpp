@@ -65,8 +65,8 @@ void Render::renderPlayBoard(std::shared_ptr<Playboard> boardToBeRendered)
 void Render::renderScoreBoard(Piece& nextPiece, int currentScore, int highScore )
 {
 	Position nextPiecePos;
-	nextPiecePos.X=400;
-	nextPiecePos.Y=50;
+	nextPiecePos.X=11;
+	nextPiecePos.Y=4;
 	Position scorePos;
 	scorePos.X=PlayboardPixelsWidth+40;
 	scorePos.Y=340;

@@ -41,5 +41,7 @@ const short PlayboardPixelsWidth = playboardTilesWidth*tileSize;
 const short PlayboardPixelsHeight = playboardTilesHeight*tileSize;
 const short ScoreBoardWidth=256;
 const short ScoreBoardHeight=PlayboardPixelsHeight;
+const short StartDropSpeed=3;
+const short dropSpeedUp=15;
 
 #endif // !NITHRISCONSTANTS_H
